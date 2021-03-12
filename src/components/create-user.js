@@ -19,11 +19,11 @@ export default class CreateUser extends Component {
     onSubmit = (e)=>{
         e.preventDefault();
         const newUser = {
-            username: this.state.username,
-            password: this.state.password,
+            "username": this.state.username,
+            "password": this.state.password,
         };
         console.log(newUser);
-        axios.post(`${process.env.REACT_APP_API}`+'/users/add',newUser)
+        axios.post(`${process.env.REACT_APP_API}/users/add`,newUser)
             .then(res => console.log(res.data));
 
         this.setState({username: '',password: ''});
