@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import Cookies from 'universal-cookie';
+
+require('dotenv').config();
+const cookies = new Cookies();
 
 export default class CreateTask extends Component {
     constructor(props){
         super(props);
         this.state = {
-            username: '',
             name: '',
             description: '',
             duration: 60,
@@ -16,25 +19,47 @@ export default class CreateTask extends Component {
         }
     }
 
-    onChangeName = (e)=>{
-        this.setState({name: e.target.value});
+    componentDidMount() {
+        console.log('PRIMERA VEZ');
+        console.log(cookies.get('username'));
+        if(!cookies.get('username')){
+            window.location.href="/";
+        }
     }
-    onChangeDescription = (e)=>{
-        this.setState({description: e.target.value});
+
+    // componentDidMount() {
+    //     this.CreateTask(this.props.location.pathname)
+    // }
+  
+  
+    // componentDidUpdate(prevProps) {
+    //   if (this.props.location !== prevProps.location) {
+    //     this.CreateTask(this.props.location.pathname);
+    //   }
+    // }
+
+    onChangeText = (e)=>{
+        const target = e.target;
+        const value = target.value;
+        const name = target.name;
+        this.setState({[name]: value});
     }
-    onChangeDuration = (e)=>{
-        this.setState({duration: e.target.value});
+    
+    onChangeNumber = (e)=>{
+        const target = e.target;
+        const value = target.value;
+        const name = target.name;
+        this.setState({[name]: Number(value)});
     }
-    onChangeImportance = (e)=>{
-        this.setState({importance: Number(e.target.value)});
-    }
-    onChangeDueDate = (date)=>{
+
+    onChangeDate = (date)=>{
         this.setState({due_date: date});
     }
+
     onSubmit = (e)=>{
         e.preventDefault();
         const newTask = {
-            username: this.state.username,
+            username: cookies.get('username'),
             name: this.state.name,
             description: this.state.description,
             duration: this.state.duration,
@@ -43,7 +68,7 @@ export default class CreateTask extends Component {
             due_date: this.state.due_date
         };
         console.log(newTask);
-        Window.location = '/';
+        // window.location.href="./";
     }
 
     render() {
@@ -60,9 +85,10 @@ export default class CreateTask extends Component {
                             required
                             className="form-control"
                             id="nameInput"
+                            name="name"
                             placeholder="Eg. Became a Brawl Stars master"
                             value={this.state.name}
-                            onChange={this.onChangeName}
+                            onChange={this.onChangeText}
                             />
                     </div>
                     <div className="form-group">
@@ -72,9 +98,10 @@ export default class CreateTask extends Component {
                             required
                             className="form-control"
                             id="descriptionInput"
+                            name="description"
                             placeholder="Eg. Watch all Trebor's videos"
                             value={this.state.description}
-                            onChange={this.onChangeDescription}
+                            onChange={this.onChangeText}
                             />
                     </div>
                     <div className="form-group">
@@ -84,28 +111,29 @@ export default class CreateTask extends Component {
                             required
                             className="form-control"
                             id="durationInput"
+                            name="duration"
                             placeholder="60"
                             value={this.state.duration}
-                            onChange={this.onChangeDuration}
+                            onChange={this.onChangeNumber}
                         />
                     </div>
                     <div className="form-group">
                         <label>Importance</label>
                         <br></br>
                         <div className="form-check form-check-inline">
-                            <input className="form-check-input" type="radio" name="importanceRadios" id="importanceRadios1" value="1" onChange={this.onChangeImportance} defaultChecked/>
+                            <input className="form-check-input" type="radio" name="importance" id="importanceRadios1" value="1" onChange={this.onChangeNumber} defaultChecked/>
                             <label className="form-check-label" htmlFor="importanceRadios1">
                                 Low
                             </label>
                         </div>
                         <div className="form-check form-check-inline">
-                            <input className="form-check-input" type="radio" name="importanceRadios" id="importanceRadios2" value="2" onChange={this.onChangeImportance}/>
+                            <input className="form-check-input" type="radio" name="importance" id="importanceRadios2" value="2" onChange={this.onChangeNumber}/>
                             <label className="form-check-label" htmlFor="importanceRadios2">
                                 Medium
                             </label>
                         </div>
                         <div className="form-check form-check-inline">
-                            <input className="form-check-input" type="radio" name="importanceRadios" id="importanceRadios3" value="3" onChange={this.onChangeImportance}/>
+                            <input className="form-check-input" type="radio" name="importance" id="importanceRadios3" value="3" onChange={this.onChangeNumber}/>
                             <label className="form-check-label" htmlFor="importanceRadios3">
                                 High
                             </label>
@@ -116,8 +144,9 @@ export default class CreateTask extends Component {
                         <div>
                             <DatePicker 
                                 id="dueDateInput"
+                                name="due_date"
                                 selected={this.state.due_date} 
-                                onChange={this.onChangeDueDate}
+                                onChange={this.onChangeDate}
                                 dateFormat="dd/MM/yyyy"
                                 minDate={new Date()}
                             />

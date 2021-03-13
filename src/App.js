@@ -4,22 +4,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Login from "./components/login"
 import Home from "./components/home"
-
-require('dotenv').config();
+import CreateUser from "./components/create-user";
 
 export default class App extends Component {
-  async componentDidMount(){
-    // const res = await fetch(process.env.REACT_APP_API + '/customers/paginated?page=1&limit=15');
-    // const data = await res.json();
-    // console.log(data);
-  }
-
   render() {
     return (
       <Router>
           <Switch>
             <Route path="/" exact component={Login}/>
             <Route path="/home" exact component={Home}/>
+            <Route path="/create-user" component={CreateUser}/>
           </Switch>
       </Router>
     );

@@ -13,7 +13,7 @@ export default class TasksList extends Component {
     render() {
         return (
             <div className="container">
-                <h1>Bienvenido(a), {cookies.get('username')}</h1>
+                <h1>Bienvenid@, {cookies.get('username')}</h1>
                 <br></br>
                 <button onClick={this.logout} className="btn btn-primary">Cerrar Sesion</button>
             </div>

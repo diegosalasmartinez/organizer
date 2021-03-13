@@ -2,12 +2,10 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
-
 import Navbar from "./navbar"
 import TasksList from "./tasks-list";
 import EditTask from "./edit-task";
 import CreateTask from "./create-task";
-import CreateUser from "./create-user";
 
 const cookies = new Cookies();
 
@@ -19,8 +17,6 @@ export default class Home extends Component {
     }
 
     render() {
-        console.log('username: '+cookies.get('username'));
-
         return (
             <Router>
                 <Navbar />
@@ -29,7 +25,6 @@ export default class Home extends Component {
                     <Route path="/home" exact component={TasksList} />
                     <Route path="/home/edit/:id" component={EditTask} />
                     <Route path="/home/create" component={CreateTask} />
-                    <Route path="/user" component={CreateUser} />
                 </Switch>
             </Router>
         )

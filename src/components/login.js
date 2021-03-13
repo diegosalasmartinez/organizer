@@ -1,7 +1,9 @@
-import axios from 'axios';
 import React, { Component } from 'react'
+import axios from 'axios';
+import { Link } from 'react-router-dom'
 import Cookies from 'universal-cookie'
 
+require('dotenv').config();
 const cookies = new Cookies();
 
 export default class Login extends Component {
@@ -10,6 +12,7 @@ export default class Login extends Component {
         this.state = {
             username: '',
             password: '',
+            userFailed: false
         }
     }
 
@@ -24,16 +27,27 @@ export default class Login extends Component {
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
         
-        this.setState({ [name]: value });
+        this.setState({[name]: value, userFailed: false});
     }
     
-    login = async (e)=>{
+    userInvalid(){
+        if(!this.state.userFailed){
+            return {
+                display: "none"
+            }
+        }
+        return{
+            color: "red",
+        }
+    }
+
+    login = (e)=>{
         e.preventDefault();
         const user = {
             username: `${this.state.username}`,
             password: `${this.state.password}`,
         };
-        await axios.post(`${process.env.REACT_APP_API}/users/login`,user)
+        axios.post(`${process.env.REACT_APP_API}/users/login`,user)
             .then(res => res.data)
             .then(data => {
                 if(data.length === 1){
@@ -41,6 +55,9 @@ export default class Login extends Component {
                     cookies.set('username',myUser.username, {path: "/"});
                     cookies.set('password',myUser.password, {path: "/"});
                     window.location.href="./home";
+                }
+                else{
+                    this.setState({userFailed: true});
                 }
             })
             .catch(e => console.log(e));
@@ -63,7 +80,7 @@ export default class Login extends Component {
                             name="username"
                             value={this.state.username}
                             onChange={this.onChange}
-                            />
+                        />
                     </div>
                     <div className="form-group">
                         <label htmlFor="passwordInput">Password</label>
@@ -75,7 +92,12 @@ export default class Login extends Component {
                             name="password"
                             value={this.state.password}
                             onChange={this.onChange}
-                            />
+                        />
+                    </div>
+                    <div style={this.userInvalid()}>Usuario y contraseña no coinciden</div>
+                    <div>¿No tienes una cuenta?
+                        <span> </span>
+                        <Link to="/create-user">Regístrate</Link>
                     </div>
                     <br></br>
                     <div className="form-group">

@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import { Link } from 'react-router-dom'
+import Cookies from 'universal-cookie'
+
+require('dotenv').config();
+const cookies = new Cookies();
 
 export default class CreateUser extends Component {
     constructor(props){
@@ -7,24 +12,48 @@ export default class CreateUser extends Component {
         this.state = {
             username: '',
             password: '',
+            userFailed: false
         }
     }
 
-    onChangeUserame = (e)=>{
-        this.setState({username: e.target.value});
+    componentDidMount() {
+        if(cookies.get('username')){
+            window.location.href="./home";
+        }
     }
-    onChangePassword = (e)=>{
-        this.setState({password: e.target.value});
+
+    onChange = (e)=>{
+        const target = e.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        
+        this.setState({[name]: value});
     }
+
+    userInvalid(){
+        if(!this.state.userFailed){
+            return {
+                display: "none"
+            }
+        }
+        return{
+            color: "red",
+        }
+    }
+
     onSubmit = (e)=>{
         e.preventDefault();
         const newUser = {
             "username": this.state.username,
             "password": this.state.password,
         };
-        console.log(newUser);
         axios.post(`${process.env.REACT_APP_API}/users/add`,newUser)
-            .then(res => console.log(res.data))
+            .then(res => {
+                console.log(res.data);
+                cookies.set('username',newUser.username, {path: "/"});
+                cookies.set('password',newUser.password, {path: "/"});
+                window.location.href="./home";
+            })
             .catch(e => console.log(e));
 
         this.setState({username: '',password: ''});
@@ -44,8 +73,9 @@ export default class CreateUser extends Component {
                             required
                             className="form-control"
                             id="usernameInput"
+                            name="username"
                             value={this.state.username}
-                            onChange={this.onChangeUserame}
+                            onChange={this.onChange}
                         />
                     </div>
                     <div className="form-group">
@@ -55,9 +85,14 @@ export default class CreateUser extends Component {
                             required
                             className="form-control"
                             id="passwordInput"
+                            name="password"
                             value={this.state.password}
-                            onChange={this.onChangePassword}
+                            onChange={this.onChange}
                             />
+                    </div>
+                    <div>¿Ya tienes una cuenta?
+                        <span> </span>
+                        <Link to="/">Ingresa</Link>
                     </div>
                     <br></br>
                     <div className="form-group">
