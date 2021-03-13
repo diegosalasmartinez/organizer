@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 import Navbar from "./navbar"
@@ -12,7 +12,7 @@ const cookies = new Cookies();
 export default class Home extends Component {
     componentDidMount() {
         if(!cookies.get('username')){
-            window.location.href="./";
+            window.location.href="./organizer";
         }
     }
 
@@ -22,9 +22,9 @@ export default class Home extends Component {
                 <Navbar />
                 <br/>
                 <Switch>
-                    <Route path="/home" exact component={TasksList} />
-                    <Route path="/home/edit/:id" component={EditTask} />
-                    <Route path="/home/create" component={CreateTask} />
+                    <Route path="/" exact component={TasksList} />
+                    <Route path="/edit/:id" exact component={EditTask} />
+                    <Route path="/create" exact component={CreateTask} />
                 </Switch>
             </Router>
         )

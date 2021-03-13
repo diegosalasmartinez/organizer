@@ -18,7 +18,7 @@ export default class Login extends Component {
 
     componentDidMount() {
         if(cookies.get('username')){
-            window.location.href="./home";
+            window.location.href="./";
         }
     }
 
@@ -54,7 +54,7 @@ export default class Login extends Component {
                     const myUser = data[0];
                     cookies.set('username',myUser.username, {path: "/"});
                     cookies.set('password',myUser.password, {path: "/"});
-                    window.location.href="./home";
+                    window.location.href="./";
                 }
                 else{
                     this.setState({userFailed: true});

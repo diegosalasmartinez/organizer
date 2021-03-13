@@ -6,14 +6,17 @@ export default class Navbar extends Component {
         return (
             <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
                 <div className="container">
-                    <Link to="/home" className="navbar-brand">Organizer</Link>
+                    <Link to="/" className="navbar-brand">Organizer</Link>
                     <div className="collpase navbar-collapse" id="navbarNavAltMarkup">
                         <ul className="navbar-nav mr-auto">
                             <li className="navbar-item">
-                                <Link to="/home" className="nav-link">Tasks</Link>
+                                <Link to="/" className="nav-link">Tasks</Link>
                             </li>
                             <li className="navbar-item">
-                                <Link to="/home/create" className="nav-link">Create Task Log</Link>
+                                <Link to="/edit/:id" className="nav-link">Edit Task</Link>
+                            </li>
+                            <li className="navbar-item">
+                                <Link to="/create" className="nav-link">Create Task Log</Link>
                             </li>
                         </ul>
                     </div>

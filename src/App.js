@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Login from "./components/login"
@@ -11,8 +11,8 @@ export default class App extends Component {
     return (
       <Router>
           <Switch>
-            <Route path="/" exact component={Login}/>
-            <Route path="/home" exact component={Home}/>
+            <Route path="/organizer" component={Login}/>
+            <Route path="/" exact component={Home}/>
             <Route path="/create-user" component={CreateUser}/>
           </Switch>
       </Router>
