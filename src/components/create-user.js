@@ -52,7 +52,7 @@ export default class CreateUser extends Component {
                 console.log(res.data);
                 cookies.set('username',newUser.username, {path: "/"});
                 cookies.set('password',newUser.password, {path: "/"});
-                window.location.href="./home";
+                window.location.href="/home";
             })
             .catch(e => console.log(e));
 
@@ -92,7 +92,7 @@ export default class CreateUser extends Component {
                     </div>
                     <div>¿Ya tienes una cuenta?
                         <span> </span>
-                        <Link to="/">Ingresa</Link>
+                        <Link to="/organizer">Ingresa</Link>
                     </div>
                     <br></br>
                     <div className="form-group">

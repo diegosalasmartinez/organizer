@@ -12,6 +12,7 @@ const cookies = new Cookies();
 export default class Home extends Component {
     componentDidMount() {
         if(!cookies.get('username')){
+            console.log('OE');
             window.location.href="/organizer";
         }
     }

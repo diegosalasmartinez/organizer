@@ -7,7 +7,7 @@ export default class TasksList extends Component {
     logout = ()=>{
         cookies.remove('username', {path: "/"});
         cookies.remove('password', {path: "/"});
-        window.location.href='./';
+        window.location.href='/organizer';
     }
 
     render() {
