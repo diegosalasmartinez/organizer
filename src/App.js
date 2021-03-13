@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Navbar from "./components/navbar"
-import TasksList from "./components/tasks-list";
-import EditTask from "./components/edit-task";
-import CreateTask from "./components/create-task";
-import CreateUser from "./components/create-user";
+import Login from "./components/login"
+import Home from "./components/home"
 
 require('dotenv').config();
 
@@ -21,13 +17,9 @@ export default class App extends Component {
   render() {
     return (
       <Router>
-          <Navbar />
-          <br/>
           <Switch>
-            <Route path="/" exact component={TasksList} />
-            <Route path="/edit/:id" component={EditTask} />
-            <Route path="/create" component={CreateTask} />
-            <Route path="/user" component={CreateUser} />
+            <Route path="/" exact component={Login}/>
+            <Route path="/home" exact component={Home}/>
           </Switch>
       </Router>
     );

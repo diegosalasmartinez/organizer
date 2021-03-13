@@ -24,7 +24,8 @@ export default class CreateUser extends Component {
         };
         console.log(newUser);
         axios.post(`${process.env.REACT_APP_API}/users/add`,newUser)
-            .then(res => console.log(res.data));
+            .then(res => console.log(res.data))
+            .catch(e => console.log(e));
 
         this.setState({username: '',password: ''});
     }
