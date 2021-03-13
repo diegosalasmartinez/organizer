@@ -8,13 +8,15 @@ import CreateUser from "./components/create-user";
 
 export default class App extends Component {
   render() {
+      // <Router>
+      //     <Switch>
+      //       <Route path="/organizer" exact component={Login}/>
+      //       <Route path="/home" exact component={Home}/>
+      //       <Route path="/create-user" exact component={CreateUser}/>
+      //     </Switch>
+      // </Router>
     return (
-      <Router>
-          <Switch>
-            <Route path="/organizer" exact component={Login}/>
-            <Route path="/create-user" exact component={CreateUser}/>
-          </Switch>
-      </Router>
+      <div>HOLA</div>
     );
   }
 }
