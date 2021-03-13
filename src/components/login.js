@@ -54,7 +54,7 @@ export default class Login extends Component {
                     const myUser = data[0];
                     cookies.set('username',myUser.username, {path: "/"});
                     cookies.set('password',myUser.password, {path: "/"});
-                    window.location.href="./home";
+                    window.location.href="/home";
                 }
                 else{
                     this.setState({userFailed: true});
