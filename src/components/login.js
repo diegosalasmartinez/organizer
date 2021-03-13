@@ -18,7 +18,7 @@ export default class Login extends Component {
 
     componentDidMount() {
         if(cookies.get('username')){
-            window.location.href="/home";
+            window.location.href="./home";
         }
     }
 
