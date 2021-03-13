@@ -12,7 +12,6 @@ export default class App extends Component {
       <Router>
           <Switch>
             <Route path="/organizer" exact component={Login}/>
-            <Route path="/home" exact component={Home}/>
             <Route path="/create-user" exact component={CreateUser}/>
           </Switch>
       </Router>
