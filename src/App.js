@@ -13,8 +13,8 @@ export default class App extends Component {
       <Router>
           <Switch>
             <Route path="/organizer" exact component={Login}/>
-            <Route path="/home" exact component={Home}/>
-            <Route path="/create-user" exact component={CreateUser}/>
+            <Route path="/organizer/home" exact component={Home}/>
+            <Route path="/organizer/create-user" exact component={CreateUser}/>
           </Switch>
       </Router>
     );

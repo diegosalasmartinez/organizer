@@ -23,9 +23,9 @@ export default class Home extends Component {
                 <Navbar />
                 <br/>
                 <Switch>
-                    <Route path="/home" exact component={TasksList} />
-                    <Route path="/home/edit/:id" exact component={EditTask} />
-                    <Route path="/home/create" exact component={CreateTask} />
+                    <Route path="/organizer/home" exact component={TasksList} />
+                    <Route path="/organizer/home/edit/:id" exact component={EditTask} />
+                    <Route path="/organizer/home/create" exact component={CreateTask} />
                 </Switch>
             </Router>
         )
