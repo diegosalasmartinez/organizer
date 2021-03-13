@@ -18,16 +18,21 @@ export default class Home extends Component {
     }
 
     render() {
+            // <Router>
+            //     <Navbar />
+            //     <br/>
+            //     <Switch>
+            //         <Route path="/organizer/home" exact component={TasksList} />
+            //         <Route path="/organizer/home/edit/:id" exact component={EditTask} />
+            //         <Route path="/organizer/home/create" exact component={CreateTask} />
+            //     </Switch>
+            // </Router>
         return (
-            <Router>
+            <div className="mainPage">
                 <Navbar />
-                <br/>
-                <Switch>
-                    <Route path="/organizer/home" exact component={TasksList} />
-                    <Route path="/organizer/home/edit/:id" exact component={EditTask} />
-                    <Route path="/organizer/home/create" exact component={CreateTask} />
-                </Switch>
-            </Router>
+                <br></br>
+                <TasksList/>
+            </div>
         )
     }
 }
