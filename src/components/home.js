@@ -12,7 +12,7 @@ const cookies = new Cookies();
 export default class Home extends Component {
     componentDidMount() {
         if(!cookies.get('username')){
-            window.location.href="/organizer";
+            window.location.href="./organizer";
         }
     }
 
@@ -22,9 +22,9 @@ export default class Home extends Component {
                 <Navbar />
                 <br/>
                 <Switch>
-                    <Route path="/" exact component={TasksList} />
-                    <Route path="/edit/:id" exact component={EditTask} />
-                    <Route path="/create" exact component={CreateTask} />
+                    <Route path="/home" exact component={TasksList} />
+                    <Route path="/home/edit/:id" exact component={EditTask} />
+                    <Route path="/home/create" exact component={CreateTask} />
                 </Switch>
             </Router>
         )

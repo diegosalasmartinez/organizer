@@ -11,9 +11,9 @@ export default class App extends Component {
     return (
       <Router>
           <Switch>
-            <Route path="/organizer" component={Login}/>
-            <Route path="/" exact component={Home}/>
-            <Route path="/create-user" component={CreateUser}/>
+            <Route path="/organizer" exact component={Login}/>
+            <Route path="/home" exact component={Home}/>
+            <Route path="/create-user" exact component={CreateUser}/>
           </Switch>
       </Router>
     );
