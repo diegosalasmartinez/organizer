@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { HashRouter as Router, Route, Switch} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Login from "./components/login"
 import Home from "./components/home"
-import Navbar from "./components/navbar";
 import CreateUser from "./components/create-user";
-import TasksList from "./components/tasks-list";
 import EditTask from "./components/edit-task";
 import CreateTask from "./components/create-task";
 
 
 export default class App extends Component {
   render() {
-    // <div>HOLA</div>
     return (
       <Router>
           <Switch>

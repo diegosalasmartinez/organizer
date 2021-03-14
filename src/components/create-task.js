@@ -21,10 +21,8 @@ export default class CreateTask extends Component {
     }
 
     componentDidMount() {
-        console.log('PRIMERA VEZ');
-        console.log(cookies.get('username'));
         if(!cookies.get('username')){
-            window.location.href="/";
+            window.location.href="/organizer";
         }
     }
 
