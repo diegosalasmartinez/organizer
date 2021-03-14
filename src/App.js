@@ -12,7 +12,7 @@ import CreateTask from "./components/create-task";
 export default class App extends Component {
   render() {
     return (
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router basename={process.env.PUBLIC_URL || ''}>
           <Switch>
             <Route path="/" exact component={Login}/>
             <Route path="/home" exact component={Home}/>
