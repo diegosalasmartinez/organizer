@@ -18,7 +18,7 @@ export default class CreateUser extends Component {
 
     componentDidMount() {
         if(cookies.get('username')){
-            window.location.href="/home";
+            window.location.href="./home";
         }
     }
 
@@ -92,7 +92,7 @@ export default class CreateUser extends Component {
                     </div>
                     <div>¿Ya tienes una cuenta?
                         <span> </span>
-                        <Link to="/organizer">Ingresa</Link>
+                        <Link to="./">Ingresa</Link>
                     </div>
                     <br></br>
                     <div className="form-group">
