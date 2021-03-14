@@ -18,7 +18,7 @@ export default class App extends Component {
             <Route path="/organizer/home" exact component={Home}/>
             <Route path="/organizer/home/edit/:id" exact component={EditTask} />
             <Route path="/organizer/home/create" exact component={CreateTask} />
-            <Route path="/organizer/create-user" exact component={CreateUser}/>
+            <Route path="/create-user" exact component={CreateUser}/>
           </Switch>
       </Router>
     );
