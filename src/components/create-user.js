@@ -18,7 +18,7 @@ export default class CreateUser extends Component {
 
     componentDidMount() {
         if(cookies.get('username')){
-            window.location.href="organizer/home";
+            window.location.href="/organizer/home";
         }
     }
 
@@ -52,7 +52,7 @@ export default class CreateUser extends Component {
                 console.log(res.data);
                 cookies.set('username',newUser.username, {path: "/"});
                 cookies.set('password',newUser.password, {path: "/"});
-                window.location.href="organizer/home";
+                window.location.href="/organizer/home";
             })
             .catch(e => console.log(e));
 

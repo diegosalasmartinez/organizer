@@ -17,9 +17,9 @@ export default class Login extends Component {
     }
 
     componentDidMount() {
-        // if(cookies.get('username')){
-        //     window.location.href="/organizer/home";
-        // }
+        if(cookies.get('username')){
+            window.location.href="/organizer/home";
+        }
     }
 
     onChange = (e)=>{
@@ -97,7 +97,7 @@ export default class Login extends Component {
                     <div style={this.userInvalid()}>Usuario y contraseña no coinciden</div>
                     <div>¿No tienes una cuenta?
                         <span> </span>
-                        <Link to="/organizer/create-user">Regístrate</Link>
+                        <Link to="./organizer/register-user">Regístrate</Link>
                     </div>
                     <br></br>
                     <div className="form-group">
