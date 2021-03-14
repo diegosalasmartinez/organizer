@@ -12,13 +12,13 @@ import CreateTask from "./components/create-task";
 export default class App extends Component {
   render() {
     return (
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
           <Switch>
-            <Route path="/organizer" exact component={Login}/>
-            <Route path="/organizer/home" exact component={Home}/>
-            <Route path="/organizer/home/edit/:id" exact component={EditTask} />
-            <Route path="/organizer/home/create" exact component={CreateTask} />
-            <Route path="/organizer/register-user" exact component={CreateUser}/>
+            <Route path="/" exact component={Login}/>
+            <Route path="/home" exact component={Home}/>
+            <Route path="/home/edit/:id" exact component={EditTask} />
+            <Route path="/home/create" exact component={CreateTask} />
+            <Route path="/register-user" exact component={CreateUser}/>
           </Switch>
       </Router>
     );

@@ -18,7 +18,7 @@ export default class Login extends Component {
 
     componentDidMount() {
         if(cookies.get('username')){
-            window.location.href="/organizer/home";
+            window.location.href="/home";
         }
     }
 
@@ -54,7 +54,7 @@ export default class Login extends Component {
                     const myUser = data[0];
                     cookies.set('username',myUser.username, {path: "/"});
                     cookies.set('password',myUser.password, {path: "/"});
-                    window.location.href="/organizer/home";
+                    window.location.href="/home";
                 }
                 else{
                     this.setState({userFailed: true});
@@ -97,7 +97,7 @@ export default class Login extends Component {
                     <div style={this.userInvalid()}>Usuario y contraseña no coinciden</div>
                     <div>¿No tienes una cuenta?
                         <span> </span>
-                        <Link to="/organizer/register-user">Regístrate</Link>
+                        <Link to="/register-user">Regístrate</Link>
                     </div>
                     <br></br>
                     <div className="form-group">

@@ -9,7 +9,7 @@ export default class EditTask extends Component {
     componentDidMount() {
         if(!cookies.get('username')){
             console.log('OE');
-            window.location.href="/organizer";
+            window.location.href="/";
         }
     }
 

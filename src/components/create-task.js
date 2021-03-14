@@ -22,7 +22,7 @@ export default class CreateTask extends Component {
 
     componentDidMount() {
         if(!cookies.get('username')){
-            window.location.href="/organizer";
+            window.location.href="/";
         }
     }
 
