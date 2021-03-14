@@ -17,7 +17,7 @@ export default class Login extends Component {
     }
 
     componentDidMount() {
-        console.log('AAAAAAAAA');
+        setTimeout(function(){ console.log('AAAAAAAAA'); }, 3500);
         //Commented for a moment
         // if(cookies.get('username')){
         //     window.location.href="/organizer/home";
