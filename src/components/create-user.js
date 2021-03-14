@@ -52,7 +52,7 @@ export default class CreateUser extends Component {
                 console.log(res.data);
                 cookies.set('username',newUser.username, {path: "/"});
                 cookies.set('password',newUser.password, {path: "/"});
-                window.location.href="/home";
+                window.location.href="./home";
             })
             .catch(e => console.log(e));
 
