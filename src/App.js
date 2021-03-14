@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Login from "./components/login"
@@ -13,7 +13,7 @@ export default class App extends Component {
   render() {
     console.log(process.env.PUBLIC_URL);
     return (
-      <Router basename={process.env.PUBLIC_URL + '/' || ''}>
+      <Router basename="/organizer">
           <Switch>
             <Route path="/" exact component={Login}/>
             <Route path="/home" exact component={Home}/>
