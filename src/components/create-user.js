@@ -22,12 +22,9 @@ export default class CreateUser extends Component {
         }
     }
 
-    onChange = (e)=>{
-        const target = e.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        
-        this.setState({[name]: value});
+    handleChange = ({target}) => {
+        const {name, value} = target;
+        this.setState({[name]: value, userFailed: false});
     }
 
     userInvalid(){
@@ -68,30 +65,14 @@ export default class CreateUser extends Component {
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label htmlFor="usernameInput">Username</label>
-                        <input  
-                            type="text"
-                            required
-                            className="form-control"
-                            id="usernameInput"
-                            name="username"
-                            value={this.state.username}
-                            onChange={this.onChange}
-                        />
+                        <input type="text" required className="form-control" id="usernameInput" name="username" value={this.state.username} onChange={this.handleChange}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="passwordInput">Password</label>
-                        <input  
-                            type="password"
-                            required
-                            className="form-control"
-                            id="passwordInput"
-                            name="password"
-                            value={this.state.password}
-                            onChange={this.onChange}
-                            />
+                        <input type="password" required className="form-control" id="passwordInput" name="password" value={this.state.password} onChange={this.handleChange}/>
                     </div>
-                    <div>¿Ya tienes una cuenta?
-                        <span> </span>
+                    <div>
+                        ¿Ya tienes una cuenta?<span> </span>
                         <Link to="./">Ingresa</Link>
                     </div>
                     <br></br>

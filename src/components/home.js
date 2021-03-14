@@ -15,10 +15,10 @@ export default class Home extends Component {
 
     render() {
         return (
-            <div className="mainPage">
+            <div>
                 <Navbar />
                 <br></br>
-                <TasksList/>
+                <TasksList />
             </div>
         )
     }

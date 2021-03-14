@@ -8,17 +8,16 @@ import CreateUser from "./components/create-user";
 import EditTask from "./components/edit-task";
 import CreateTask from "./components/create-task";
 
-
 export default class App extends Component {
   render() {
     return (
       <Router basename="/organizer">
           <Switch>
-            <Route path="/" exact component={Login}/>
-            <Route path="/home" exact component={Home}/>
+            <Route path="/" exact component={Login} />
+            <Route path="/home" exact component={Home} />
             <Route path="/home/edit/:id" exact component={EditTask} />
             <Route path="/home/create" exact component={CreateTask} />
-            <Route path="/register-user" exact component={CreateUser}/>
+            <Route path="/register-user" exact component={CreateUser} />
           </Switch>
       </Router>
     );

@@ -22,25 +22,11 @@ export default class Login extends Component {
         }
     }
 
-    onChange = (e)=>{
-        const target = e.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        
+    handleChange = ({target}) => {
+        const {name, value} = target;
         this.setState({[name]: value, userFailed: false});
     }
     
-    userInvalid(){
-        if(!this.state.userFailed){
-            return {
-                display: "none"
-            }
-        }
-        return{
-            color: "red",
-        }
-    }
-
     login = (e)=>{
         e.preventDefault();
         const user = {
@@ -52,6 +38,7 @@ export default class Login extends Component {
             .then(data => {
                 if(data.length === 1){
                     const myUser = data[0];
+                    cookies.set('id',myUser._id, {path: "/"});
                     cookies.set('username',myUser.username, {path: "/"});
                     cookies.set('password',myUser.password, {path: "/"});
                     window.location.href="./home";
@@ -72,31 +59,15 @@ export default class Login extends Component {
                 <form onSubmit={this.login}>
                     <div className="form-group">
                         <label htmlFor="usernameInput">Username</label>
-                        <input  
-                            type="text"
-                            required
-                            className="form-control"
-                            id="usernameInput"
-                            name="username"
-                            value={this.state.username}
-                            onChange={this.onChange}
-                        />
+                        <input type="text" required className="form-control" id="usernameInput" name="username" value={this.state.username} onChange={this.handleChange} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="passwordInput">Password</label>
-                        <input  
-                            type="password"
-                            required
-                            className="form-control"
-                            id="passwordInput"
-                            name="password"
-                            value={this.state.password}
-                            onChange={this.onChange}
-                        />
+                        <input type="password" required className="form-control" id="passwordInput" name="password" value={this.state.password} onChange={this.handleChange} />
                     </div>
-                    <div style={this.userInvalid()}>Usuario y contraseña no coinciden</div>
-                    <div>¿No tienes una cuenta?
-                        <span> </span>
+                    {this.state.userFailed && <p style={{color: "red"}}>Usuario y contraseña no coinciden</p>}
+                    <div>
+                        ¿No tienes una cuenta?<span> </span>
                         <Link to="./register-user">Regístrate</Link>
                     </div>
                     <br></br>
