@@ -11,6 +11,7 @@ import CreateTask from "./components/create-task";
 
 export default class App extends Component {
   render() {
+    console.log(process.env.PUBLIC_URL);
     return (
       <Router basename={process.env.PUBLIC_URL + '/' || ''}>
           <Switch>
