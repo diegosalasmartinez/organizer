@@ -1,1 +1,1 @@
-# App connected to Contact Book API REST
+# My app
