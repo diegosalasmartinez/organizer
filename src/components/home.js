@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 import Navbar from "./navbar"
 import TasksList from "./tasks-list";
-import EditTask from "./edit-task";
-import CreateTask from "./create-task";
 
 const cookies = new Cookies();
 

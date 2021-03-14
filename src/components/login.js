@@ -97,7 +97,7 @@ export default class Login extends Component {
                     <div style={this.userInvalid()}>Usuario y contraseña no coinciden</div>
                     <div>¿No tienes una cuenta?
                         <span> </span>
-                        <Link to="/create-user">Regístrate</Link>
+                        <Link to="/organizer/create-user">Regístrate</Link>
                     </div>
                     <br></br>
                     <div className="form-group">
