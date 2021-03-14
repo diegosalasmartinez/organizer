@@ -26,17 +26,6 @@ export default class CreateTask extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     this.CreateTask(this.props.location.pathname)
-    // }
-  
-  
-    // componentDidUpdate(prevProps) {
-    //   if (this.props.location !== prevProps.location) {
-    //     this.CreateTask(this.props.location.pathname);
-    //   }
-    // }
-
     onChangeText = (e)=>{
         const target = e.target;
         const value = target.value;
