@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Cookies from 'universal-cookie';
 
-import Navbar from "./navbar"
-import TasksList from "./tasks-list";
+import Navbar from "./Navbar"
+import TasksList from "./TaskList";
 
 const cookies = new Cookies();
 

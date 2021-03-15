@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import Navbar from "./navbar"
+import Navbar from "./Navbar"
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();

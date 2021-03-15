@@ -29,20 +29,16 @@ export default class CreateUser extends Component {
 
     userInvalid(){
         if(!this.state.userFailed){
-            return {
-                display: "none"
-            }
+            return { display: "none" }
         }
-        return{
-            color: "red",
-        }
+        return { color: "red" }
     }
 
     onSubmit = (e)=>{
         e.preventDefault();
         const newUser = {
-            "username": this.state.username,
-            "password": this.state.password,
+            username: this.state.username,
+            password: this.state.password,
         };
         axios.post(`${process.env.REACT_APP_API}/users/add`,newUser)
             .then(res => {
@@ -52,8 +48,6 @@ export default class CreateUser extends Component {
                 window.location.href="./home";
             })
             .catch(e => console.log(e));
-
-        this.setState({username: '',password: ''});
     }
 
     render() {

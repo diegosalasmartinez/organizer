@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Login from "./components/login"
-import Home from "./components/home"
-import CreateUser from "./components/create-user";
-import EditTask from "./components/edit-task";
-import CreateTask from "./components/create-task";
+import Login from "./components/Login"
+import Home from "./components/Home"
+import CreateUser from "./components/CreateUser";
+import EditTask from "./components/EditTask";
+import CreateTask from "./components/CreateTask";
 
 export default class App extends Component {
   render() {
