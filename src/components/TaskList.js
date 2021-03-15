@@ -30,13 +30,20 @@ export default class TasksList extends Component {
         cookies.remove('password', {path: "/"});
         window.location.href='./';
     }
-
+    
     deleteTask = (id) => {
         console.log(`Deleting task ${id}`);
+        axios.delete(`${process.env.REACT_APP_API}/tasks/${id}`)
+            .then(res => {
+                console.log(res.data)
+                this.setState({tasks: this.state.tasks.filter(el => el._id !== id)})
+            })
+            .catch(e => console.log(e));
     }
     
     updateTask = (id) => {
         console.log(`Updating task ${id}`);
+        window.location.href='./home/edit/'+id;
     }
 
     tasksList = ()=>{
