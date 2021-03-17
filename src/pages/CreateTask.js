@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import TaskForm from "./TaskForm"
+import TaskForm from "../components/TaskForm"
 import Cookies from 'universal-cookie';
 
 require('dotenv').config();
