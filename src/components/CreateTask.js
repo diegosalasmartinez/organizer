@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Navbar from "./Navbar"
 import TaskForm from "./TaskForm"
 import Cookies from 'universal-cookie';
 
@@ -17,18 +16,14 @@ export default class CreateTask extends Component {
         axios.post(`${process.env.REACT_APP_API}/tasks/add`,newTask)
             .then(res => {
                 console.log(res.data);
-                window.location.href="./";
+                window.location.href="../home";
             })
             .catch(e => console.log(e));
     }
 
     render() {
         return (
-            <div className="mainPage">
-                <Navbar />
-                <br></br>
-                <TaskForm onSubmit={this.createTask} textButton={"Create Task"}/>
-            </div>
+            <TaskForm onSubmit={this.createTask} textButton={"Create"} title={"Create Task"}/>
         )
     }
 }

@@ -32,30 +32,39 @@ export default class TasksList extends Component {
     }
     
     deleteTask = (id) => {
-        console.log(`Deleting task ${id}`);
-        axios.delete(`${process.env.REACT_APP_API}/tasks/${id}`)
-            .then(res => {
-                console.log(res.data)
-                this.setState({tasks: this.state.tasks.filter(el => el._id !== id)})
-            })
-            .catch(e => console.log(e));
+        const ans = window.confirm('¿Está seguro de eliminar la tarea?');
+        if(ans){
+            axios.delete(`${process.env.REACT_APP_API}/tasks/${id}`)
+                .then(res => { this.setState({tasks: this.state.tasks.filter(el => el._id !== id)}) })
+                .catch(e => console.log(e));
+            alert('¡Tarea eliminada!');
+        }
     }
     
+    finishTask = (id) => {
+        const ans = window.confirm('¿Está seguro de marcar la tarea como completada?');
+        if(ans){
+            axios.delete(`${process.env.REACT_APP_API}/tasks/${id}`)
+                .then(res => { this.setState({tasks: this.state.tasks.filter(el => el._id !== id)}) })
+                .catch(e => console.log(e));
+            alert('¡Tarea completada!');
+        }
+    }
+
     updateTask = (id) => {
-        console.log(`Updating task ${id}`);
         window.location.href='./home/edit/'+id;
     }
 
     tasksList = ()=>{
         return this.state.tasks.map(task => {
-            return <Task task={task} deleteTask={this.deleteTask} updateTask={this.updateTask} key={task._id}/>
+            return <Task task={task} deleteTask={this.deleteTask} updateTask={this.updateTask} finishTask={this.finishTask} key={task._id}/>
         })
     }
 
     render() {
         return (
             <div className="container">
-                <h1>Bienvenid@, {cookies.get('username')}</h1>
+                <h1>Welcome, {cookies.get('username')}</h1>
                 <br></br>
                 <div className="table-responsive-sm">
                     <table className="table table-bordered">
@@ -74,7 +83,7 @@ export default class TasksList extends Component {
                         </tbody>
                     </table>
                 </div>
-                <button onClick={this.logout} className="btn btn-primary">Cerrar Sesion</button>
+                <button onClick={this.logout} className="btn btn-primary">Log out</button>
             </div>
         )
     }

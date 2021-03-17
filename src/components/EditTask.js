@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import Navbar from "./Navbar"
 import TaskForm from "./TaskForm"
 import Cookies from 'universal-cookie';
 
@@ -15,22 +14,17 @@ export default class EditTask extends Component {
     }
 
     updateTask = (newTask) => {
-        console.log('UPDATE TASK');
-        // axios.post(`${process.env.REACT_APP_API}/tasks/add`,newTask)
-        //     .then(res => {
-        //         console.log(res.data);
-        //         window.location.href="./";
-        //     })
-        //     .catch(e => console.log(e));
+        axios.patch(`${process.env.REACT_APP_API}/tasks/${newTask.id}`,newTask)
+            .then(res => {
+                console.log(res.data);
+                window.location.href="../../home";
+            })
+            .catch(e => console.log(e));
     }
 
     render() {
         return (
-            <div className="mainPage">
-                <Navbar />
-                <br></br>
-                <TaskForm onSubmit={this.updateTask} textButton={"Update Task"}/>
-            </div>
+            <TaskForm onSubmit={this.updateTask} textButton={"Update"} title={"Update Task"} id={this.props.match.params.id}/>
         )
     }
 }

@@ -33,7 +33,7 @@ export default class Login extends Component {
             username: `${this.state.username}`,
             password: `${this.state.password}`,
         };
-        axios.post(`${process.env.REACT_APP_API}/users/login`,user)
+        axios.get(`${process.env.REACT_APP_API}/users/login/${user.username}/${user.password}`)
             .then(res => res.data)
             .then(data => {
                 if(data.length === 1){

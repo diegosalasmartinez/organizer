@@ -10,6 +10,10 @@ export default class Task extends Component {
     deleteTask = () => {
         this.props.deleteTask(this.props.task._id);
     }
+    
+    finishTask = () => {
+        this.props.finishTask(this.props.task._id);
+    }
 
     render() {
         return (
@@ -22,7 +26,7 @@ export default class Task extends Component {
                 <td>
                     <FontAwesomeIcon onClick={this.updateTask} icon={faPen} />
                     <span>   </span>
-                    <FontAwesomeIcon icon={faCheck} />
+                    <FontAwesomeIcon onClick={this.finishTask} icon={faCheck} />
                     <span>   </span>
                     <FontAwesomeIcon onClick={this.deleteTask} icon={faTrashAlt} />
                     <span>   </span>
