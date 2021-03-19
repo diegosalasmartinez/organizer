@@ -29,11 +29,8 @@ export default class Login extends Component {
     
     login = (e)=>{
         e.preventDefault();
-        const user = {
-            username: `${this.state.username}`,
-            password: `${this.state.password}`,
-        };
-        axios.get(`${process.env.REACT_APP_API}/users/login/${user.username}/${user.password}`)
+        const { username, password} = this.state;
+        axios.get(`${process.env.REACT_APP_API}/users/login/${username}/${password}`)
             .then(res => res.data)
             .then(data => {
                 if(data.length === 1){
