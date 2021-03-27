@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Task from './Task'
+import { sortingTasks } from '../Utils/taskUtils'
 import axios from 'axios';
 import Cookies from 'universal-cookie'
 
@@ -20,7 +21,10 @@ export default class TasksList extends Component {
         }
         else{
             axios.get(`${process.env.REACT_APP_API}/tasks/${cookies.get('username')}`)
-                .then(res => this.setState({tasks: res.data}))
+                .then(res => {
+                    sortingTasks(res.data);
+                    this.setState({tasks: res.data});
+                })
                 .catch(e => console.log(e));
         }
     }

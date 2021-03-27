@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios';
 import validateFields from './validationNewUser'
 
 export default class FormUser extends Component {
@@ -24,17 +25,27 @@ export default class FormUser extends Component {
         }
     }
 
+    componentDidMount(){
+        axios.get(`${process.env.REACT_APP_API}/users`)
+        .then(res => {
+            const usernames = res.data.map( function(obj){ return obj["username"] })
+            this.setState({users: usernames});
+        })
+        .catch(e => console.log(e));
+    }
+
     handleChange = ({target}) => {
         const {name, value} = target;
         this.setState({[name]: value});
+        const newErrors = this.state.errors;
+        newErrors[name] = '';
+        this.setState({errors: newErrors});
     }
 
-    userInvalid(){
-        //Validate forms
-        if(!this.state.userFailed){
-            return { display: "none" }
+    showError = (field) => {
+        if(this.state.errors[field]){
+            return <p style={{color: "red"}}>{this.state.errors[field]}</p>
         }
-        return { color: "red" }
     }
 
     onSubmit = (e)=>{
@@ -42,8 +53,11 @@ export default class FormUser extends Component {
         const {users, ...withoutUsers} = this.state;
         const {errors, ...newUser} = withoutUsers;
         const newErrors = validateFields(newUser,users);
-        console.log(newErrors);
-        // this.props.createUser(newUser);
+        
+        if(!Object.keys(newErrors).length){
+            this.props.createUser(newUser);
+        } 
+        this.setState({errors: newErrors});
     }
 
     render() {
@@ -58,30 +72,36 @@ export default class FormUser extends Component {
                             <label htmlFor="nameInput">Name</label>
                             <input type="text" required className="form-control" id="nameInput" name="name" value={this.state.name} onChange={this.handleChange}/>
                         </div>
+                        {this.showError("name")}
                         <div className="form-group col-md-6">
                             <label htmlFor="lastNameInput">Lastname</label>
                             <input type="text" required className="form-control" id="lastNameInput" name="lastName" value={this.state.lastName} onChange={this.handleChange}/>
                         </div>
+                        {this.showError("lastName")}
                     </div>
                     <div className="form-group">
                         <label htmlFor="emailInput">Email</label>
                         <input type="email" required className="form-control" id="emailInput" name="email" value={this.state.email} onChange={this.handleChange}/>
                     </div>
+                    {this.showError("email")}
                     <div className="form-group">
                         <label htmlFor="usernameInput">Username</label>
                         <input type="text" required className="form-control" id="usernameInput" name="username" value={this.state.username} onChange={this.handleChange}/>
                     </div>
+                    {this.showError("username")}
                     <div className="form-group">
                         <label htmlFor="passwordInput">Password</label>
                         <input type="password" required className="form-control" id="passwordInput" name="password" value={this.state.password} onChange={this.handleChange}/>
                     </div>
+                    {this.showError("password")}
                     <div className="form-group">
                         <label htmlFor="passwordConfirmationInput">Confirm password</label>
                         <input type="password" required className="form-control" id="passwordConfirmationInput" name="passwordConfirmation" value={this.state.passwordConfirmation} onChange={this.handleChange}/>
                     </div>
+                    {this.showError("passwordConfirmation")}
                     <div>
-                        ¿Ya tienes una cuenta?<span> </span>
-                        <Link to="./">Ingresa</Link>
+                        ¿Have an account?<span> </span>
+                        <Link to="./">Log in</Link>
                     </div>
                     <br></br>
                     <div className="form-group">

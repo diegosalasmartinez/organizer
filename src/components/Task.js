@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faTrashAlt, faPen, faStar } from '@fortawesome/free-solid-svg-icons'
+import { showDateAsString } from '../Utils/taskUtils'
 
 export default class Task extends Component {
     updateTask = () => {
@@ -14,6 +15,13 @@ export default class Task extends Component {
     finishTask = () => {
         this.props.finishTask(this.props.task._id);
     }
+    
+    showImportance = () => {
+        const nStars = this.props.task.importance;
+        return Array.apply(null, Array(nStars)).map((e,i) => {
+            return <FontAwesomeIcon key={i} icon={faStar} />
+        })
+    }
 
     render() {
         return (
@@ -21,14 +29,14 @@ export default class Task extends Component {
                 <td>{this.props.task.name}</td>
                 <td>{this.props.task.description}</td>
                 <td>{this.props.task.duration}</td>
-                <td>{this.props.task.importance}</td>
-                <td>{(this.props.task.due_date).slice(0,10)}</td>
+                <td>{this.showImportance()}</td>
+                <td>{showDateAsString(new Date(this.props.task.due_date))}</td>
                 <td>
-                    <FontAwesomeIcon onClick={this.updateTask} icon={faPen} />
+                    <FontAwesomeIcon key={1} onClick={this.updateTask} icon={faPen} />
                     <span>   </span>
-                    <FontAwesomeIcon onClick={this.finishTask} icon={faCheck} />
+                    <FontAwesomeIcon key={2} onClick={this.finishTask} icon={faCheck} />
                     <span>   </span>
-                    <FontAwesomeIcon onClick={this.deleteTask} icon={faTrashAlt} />
+                    <FontAwesomeIcon key={3} onClick={this.deleteTask} icon={faTrashAlt} />
                     <span>   </span>
                 </td>
             </tr>

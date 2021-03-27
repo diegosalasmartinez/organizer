@@ -64,12 +64,12 @@ export default class Login extends Component {
                     </div>
                     {this.state.userFailed && <p style={{color: "red"}}>Usuario y contraseña no coinciden</p>}
                     <div>
-                        ¿No tienes una cuenta?<span> </span>
-                        <Link to="./register-user">Regístrate</Link>
+                        ¿Don't have an account?<span> </span>
+                        <Link to="./register-user">Sign up</Link>
                     </div>
                     <br></br>
                     <div className="form-group">
-                        <input type="submit" value="Entrar" className="btn btn-primary" />
+                        <input type="submit" value="Enter" className="btn btn-primary" />
                     </div>
                 </form>
             </div>
