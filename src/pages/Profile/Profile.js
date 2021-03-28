@@ -7,7 +7,7 @@ export default class Profile extends Component {
             <>
                 <Navbar/>
                 <div className="container">
-                    PERFIL
+                    NEW BRANCH - THIS IS THE NEW PROFILE
                 </div>
             </>
         )
