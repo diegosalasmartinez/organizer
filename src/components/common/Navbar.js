@@ -6,10 +6,12 @@ const cookies = new Cookies();
 
 export default class Navbar extends Component {
 
-    logout = ()=>{
+    logout = (e) => {
+        e.preventDefault();
+        console.log('EXIT');
         cookies.remove('username', {path: "/"});
         cookies.remove('password', {path: "/"});
-        window.location.href='../../home';
+        window.location.href="./";
     }
 
     render() {
