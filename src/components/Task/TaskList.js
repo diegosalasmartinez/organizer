@@ -61,7 +61,7 @@ export default class TasksList extends Component {
     sayHello = () => {
         return (
         <>
-            <h1>Welcome, {cookies.get('name')} {cookies.get('lastName')}</h1>
+            <h2>Welcome {cookies.get('name')} {cookies.get('lastName')}</h2>
             <br></br>
         </> )
     }

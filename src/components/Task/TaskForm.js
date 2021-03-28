@@ -73,12 +73,10 @@ export default class TaskForm extends Component {
 
     render() {
         return (
-            <div className="mainPage">
+            <>
                 <Navbar />
-                <br></br>
                 <div className="container">
-                    <br></br>
-                    <h3>{this.props.title}</h3>
+                    <h2>{this.props.title}</h2>
                     <br></br>
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
@@ -116,7 +114,7 @@ export default class TaskForm extends Component {
                             </div>
                         </div>
                         <br></br>
-                        <div className="form-group row">
+                        <div className="form-group">
                             <button type="button" className="btn btn-primary mr-2" onClick={this.backHome}>Back</button>
                             <input type="submit" value={this.props.textButton} className="btn btn-primary" />
                         </div>
@@ -124,8 +122,7 @@ export default class TaskForm extends Component {
                         </div>
                     </form>
                 </div>
-            </div>
-        
+            </>
         )
     }
 }
