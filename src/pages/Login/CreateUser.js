@@ -17,8 +17,13 @@ export default class CreateUser extends Component {
         const {passwordConfirmation, ...user} = newUser;
         axios.post(`${process.env.REACT_APP_API}/users/add`,user)
             .then(res => {
-                cookies.set('username',newUser.username, {path: "/"});
-                cookies.set('password',newUser.password, {path: "/"});
+                const myUser = res.data;
+                cookies.set('id',myUser._id, {path: "/"});
+                cookies.set('username',myUser.username, {path: "/"});
+                cookies.set('password',myUser.password, {path: "/"});
+                cookies.set('name',myUser.name, {path: "/"});
+                cookies.set('lastName',myUser.lastName, {path: "/"});
+                cookies.set('email',myUser.email, {path: "/"});
                 window.location.href="./home";
             })
             .catch(e => console.log(e));

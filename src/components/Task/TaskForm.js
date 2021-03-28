@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Navbar from "./Navbar"
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import Navbar from '../common/Navbar'
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 
@@ -11,7 +11,8 @@ export default class TaskForm extends Component {
     constructor(props){
         super(props);
         this.state = {
-            name: '',
+            userId: '',
+            title: '',
             description: '',
             duration: 60,
             importance: 1,
@@ -27,9 +28,9 @@ export default class TaskForm extends Component {
         if(this.props.id){
             await axios.get(`${process.env.REACT_APP_API}/tasks/byId/${this.props.id}`)
             .then(res => {
-                    const {_id, name, description, duration, importance} = res.data;
+                    const {_id, title, description, duration, importance} = res.data;
                     const due_date = new Date(res.data.due_date);
-                    this.setState({_id:_id, name: name, description: description, duration: duration, importance: importance, due_date: due_date}) 
+                    this.setState({_id:_id, title: title, description: description, duration: duration, importance: importance, due_date: due_date}) 
                 })
                 .catch(e => console.log(e));
         }
@@ -37,8 +38,14 @@ export default class TaskForm extends Component {
 
     handleChange = ({target}) => {
         let {name, value} = target;
-        value = typeof this.state[name] === 'number' ? parseInt(value) : value;
+        if(typeof this.state[name] === 'number') value = this.handleNumbers(name, value);
         this.setState({[name]: value});
+    }
+    
+    handleNumbers = (name, value) => {
+        if (name === "duration" && value === "") value = parseInt(0); 
+        else value = parseInt(value);
+        return value;
     }
 
     onChangeDate = (date)=>{
@@ -53,12 +60,11 @@ export default class TaskForm extends Component {
     onSubmit = (e)=>{
         e.preventDefault();
         const newTask = {
-            username: cookies.get('username'),
-            name: this.state.name,
+            userId: cookies.get('id'),
+            title: this.state.title,
             description: this.state.description,
             duration: this.state.duration,
             importance: this.state.importance,
-            registration_date: new Date(),
             due_date: this.state.due_date
         };
         if(this.state._id) newTask.id = this.state._id;
@@ -77,7 +83,7 @@ export default class TaskForm extends Component {
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
                             <label htmlFor="nameInput">Title</label>
-                            <input type="text" required className="form-control" id="nameInput" name="name" placeholder="Eg. Became a Brawl Stars master" value={this.state.name} onChange={this.handleChange} />
+                            <input type="text" required className="form-control" id="nameInput" name="title" placeholder="Eg. Became a Brawl Stars master" value={this.state.title} onChange={this.handleChange} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="descriptionInput">Description</label>

@@ -9,7 +9,7 @@ const validateFields = (user,usernames) => {
     if(!user.lastName) errors.lastName = "What's your lastname?";
     if(usernames.includes(user.username)) errors.username = "This username is not available";
     if(!validateEmail(user.email)) errors.email = "Email is not valid";
-    if(user.password.length < 5) errors.password = "Your password must contain at least 5 letters";
+    if(user.password.length < 8) errors.password = "Your password must contain at least 5 letters";
     if(user.password !== user.passwordConfirmation) errors.passwordConfirmation = "Passwords don't match";
     return errors;
 }

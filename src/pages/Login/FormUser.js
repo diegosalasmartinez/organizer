@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
-import validateFields from './validationNewUser'
+import validateFields from '../../Utils/userUtils'
 
 export default class FormUser extends Component {
     constructor(props){
