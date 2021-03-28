@@ -8,9 +8,11 @@ export default class Navbar extends Component {
 
     logout = (e) => {
         e.preventDefault();
-        console.log('EXIT');
+        cookies.remove('id', {path: "/"});
         cookies.remove('username', {path: "/"});
-        cookies.remove('password', {path: "/"});
+        cookies.remove('name', {path: "/"});
+        cookies.remove('lastName', {path: "/"});
+        cookies.remove('email', {path: "/"});
         window.location.href="./";
     }
 

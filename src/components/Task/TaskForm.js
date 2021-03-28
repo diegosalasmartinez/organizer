@@ -57,7 +57,7 @@ export default class TaskForm extends Component {
         window.location.href="../../home";
     }
 
-    onSubmit = (e)=>{
+    onSubmit = e => {
         e.preventDefault();
         const newTask = {
             userId: cookies.get('id'),
