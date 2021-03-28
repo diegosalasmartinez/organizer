@@ -24,7 +24,7 @@ export default class EditTask extends Component {
 
     render() {
         return (
-            <TaskForm onSubmit={this.updateTask} textButton={"Update"} title={"Update Task"} id={this.props.match.params.id}/>
+            <TaskForm onSubmit={this.updateTask} textButton={"Update"} id={this.props.match.params.id}/>
         )
     }
 }

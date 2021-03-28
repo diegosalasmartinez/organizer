@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Cookies from 'universal-cookie'
-import Navbar from '../../components/common/Navbar'
+import Navigation from '../../components/common/Navigation'
 import TasksList from '../../components/Task/TaskList'
 
 const cookies = new Cookies();
@@ -15,7 +15,7 @@ export default class Home extends Component {
     render() {
         return (
             <>
-                <Navbar />
+                <Navigation />
                 <TasksList />
             </>
         )

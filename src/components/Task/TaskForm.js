@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import Navbar from '../common/Navbar'
+import Navigation from '../common/Navigation'
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 
@@ -74,10 +74,8 @@ export default class TaskForm extends Component {
     render() {
         return (
             <>
-                <Navbar />
+                <Navigation />
                 <div className="container">
-                    <h2>{this.props.title}</h2>
-                    <br></br>
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
                             <label htmlFor="nameInput">Title</label>

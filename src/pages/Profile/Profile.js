@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Navbar from '../../components/common/Navbar'
+import Navigation from '../../components/common/Navigation'
 import ChangePassword from './ChangePassword'
 
 export default class Profile extends Component {
@@ -30,7 +30,7 @@ export default class Profile extends Component {
     render() {
         return (
             <>
-                <Navbar/>
+                <Navigation/>
                 <div className="container">
                     <form onSubmit={this.onSubmit}>
                         <div className="form-row">

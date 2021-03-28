@@ -58,14 +58,6 @@ export default class TasksList extends Component {
         window.location.href='./home/edit/'+id;
     }
 
-    sayHello = () => {
-        return (
-        <>
-            <h2>Welcome {cookies.get('name')} {cookies.get('lastName')}</h2>
-            <br></br>
-        </> )
-    }
-
     tasksList = () => {
         return this.state.tasks.map(task => {
             return <Task task={task} deleteTask={this.deleteTask} updateTask={this.updateTask} finishTask={this.finishTask} key={task._id}/>
@@ -75,7 +67,6 @@ export default class TasksList extends Component {
     render() {
         return (
             <div className="container">
-                {this.sayHello()}
                 <div className="table-responsive-sm">
                     <table className="table table-bordered">
                         <thead className="thead-dark">
