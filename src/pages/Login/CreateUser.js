@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import FormUser from './FormUser'
-import Cookies from 'universal-cookie'
 
+import Cookies from 'universal-cookie'
 require('dotenv').config();
 const cookies = new Cookies();
 

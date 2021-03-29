@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+
 import axios from 'axios';
 import validateFields from '../../Utils/userUtils'
 
@@ -62,53 +68,48 @@ export default class FormUser extends Component {
 
     render() {
         return (
-            <div className="container">
+            <Container>
                 <br></br>
                 <h3>Create New User</h3>
                 <br></br>
-                <form onSubmit={this.onSubmit}>
-                    <div className="form-row">
-                        <div className="form-group col-md-6">
-                            <label htmlFor="nameInput">Name</label>
-                            <input type="text" required className="form-control" id="nameInput" name="name" value={this.state.name} onChange={this.handleChange}/>
-                        </div>
+                <Form>
+                    <Form.Row>
+                        <Form.Group as={Col} md="6" controlId="nameInput">
+                            <Form.Label htmlFor="nameInput">Name</Form.Label>
+                            <Form.Control type="text" required name="name" value={this.state.name} onChange={this.handleChange}/>
+                        </Form.Group>
                         {this.showError("name")}
-                        <div className="form-group col-md-6">
-                            <label htmlFor="lastNameInput">Lastname</label>
-                            <input type="text" required className="form-control" id="lastNameInput" name="lastName" value={this.state.lastName} onChange={this.handleChange}/>
-                        </div>
+                        <Form.Group as={Col} md="6" controlId="lastNameInput">
+                            <Form.Label htmlFor="lastNameInput">Lastname</Form.Label>
+                            <Form.Control type="text" required name="lastName" value={this.state.lastName} onChange={this.handleChange}/>
+                        </Form.Group>
                         {this.showError("lastName")}
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="emailInput">Email</label>
-                        <input type="email" required className="form-control" id="emailInput" name="email" value={this.state.email} onChange={this.handleChange}/>
-                    </div>
+                    </Form.Row>
+                    <Form.Group controlId="emailInput">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control type="email" required name="email" value={this.state.email} onChange={this.handleChange}/>
+                    </Form.Group>
                     {this.showError("email")}
-                    <div className="form-group">
-                        <label htmlFor="usernameInput">Username</label>
-                        <input type="text" required className="form-control" id="usernameInput" name="username" value={this.state.username} onChange={this.handleChange}/>
-                    </div>
+                    <Form.Group controlId="usernameInput">
+                        <Form.Label>Username</Form.Label>
+                        <Form.Control type="text" required name="username" value={this.state.username} onChange={this.handleChange}/>
+                    </Form.Group>
                     {this.showError("username")}
-                    <div className="form-group">
-                        <label htmlFor="passwordInput">Password</label>
-                        <input type="password" required className="form-control" id="passwordInput" name="password" value={this.state.password} onChange={this.handleChange}/>
-                    </div>
+                    <Form.Group controlId="passwordInput">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" required name="password" value={this.state.password} onChange={this.handleChange}/>
+                    </Form.Group>
                     {this.showError("password")}
-                    <div className="form-group">
-                        <label htmlFor="passwordConfirmationInput">Confirm password</label>
-                        <input type="password" required className="form-control" id="passwordConfirmationInput" name="passwordConfirmation" value={this.state.passwordConfirmation} onChange={this.handleChange}/>
-                    </div>
+                    <Form.Group controlId="passwordConfirmationInput">
+                        <Form.Label>Confirm password</Form.Label>
+                        <Form.Control type="password" required name="passwordConfirmation" value={this.state.passwordConfirmation} onChange={this.handleChange}/>
+                    </Form.Group>
                     {this.showError("passwordConfirmation")}
-                    <div>
-                        ¿Have an account?<span> </span>
-                        <Link to="./">Log in</Link>
-                    </div>
+                    <p>¿Have an account?<span> </span><Link to="./">Log in</Link></p>
                     <br></br>
-                    <div className="form-group">
-                        <input type="submit" value="Create User" className="btn btn-primary" />
-                    </div>
-                </form>
-            </div>
+                    <Button variant="primary" type="submit" onClick={this.onSubmit}>Create User</Button>
+                </Form>
+            </Container>
         )
     }
 }

@@ -72,13 +72,9 @@ export default class Login extends Component {
                         <Form.Control type="password" required name="password" value={this.state.password} onChange={this.handleChange} />
                     </Form.Group>
                     {this.state.userFailed && <Alert variant={'danger'}>User and password don't match!</Alert>}
-                    <p>¿Don't have an account?<span> </span>
-                        <Link to="./register-user">Sign up</Link>
-                    </p>
+                    <p>¿Don't have an account?<span> </span><Link to="./register-user">Sign up</Link></p>
                     <br></br>
-                    <Button variant="primary" type="submit" onClick={this.login}>
-                        Enter
-                    </Button>
+                    <Button variant="primary" type="submit" onClick={this.login}>Enter</Button>
                 </Form>
             </Container>
         )
