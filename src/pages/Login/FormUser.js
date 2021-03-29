@@ -48,13 +48,13 @@ export default class FormUser extends Component {
         this.setState({errors: newErrors});
     }
 
-    showError = (field) => {
+    showError = field => {
         if(this.state.errors[field]){
             return <p style={{color: "red"}}>{this.state.errors[field]}</p>
         }
     }
 
-    onSubmit = (e)=>{
+    onSubmit = e => {
         e.preventDefault();
         const {users, ...withoutUsers} = this.state;
         const {errors, ...newUser} = withoutUsers;

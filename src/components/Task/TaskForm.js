@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
+
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Navigation from '../common/Navigation'
+
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
+
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 
