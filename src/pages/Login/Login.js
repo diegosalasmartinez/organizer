@@ -62,7 +62,7 @@ export default class Login extends Component {
                 <br></br>
                 <h3>Login</h3>
                 <br></br>
-                <Form>
+                <Form onSubmit={this.login}>
                     <Form.Group controlId="usernameInput">
                         <Form.Label>Username</Form.Label>
                         <Form.Control type="text" required name="username" value={this.state.username} onChange={this.handleChange} />
@@ -73,8 +73,7 @@ export default class Login extends Component {
                     </Form.Group>
                     {this.state.userFailed && <Alert variant={'danger'}>User and password don't match!</Alert>}
                     <p>¿Don't have an account?<span> </span><Link to="./register-user">Sign up</Link></p>
-                    <br></br>
-                    <Button variant="primary" type="submit" onClick={this.login}>Enter</Button>
+                    <Button type="submit">Enter</Button>
                 </Form>
             </Container>
         )
