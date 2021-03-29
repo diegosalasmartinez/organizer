@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
-import axios from 'axios';
 import { Link } from 'react-router-dom'
+
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
+
+
+import axios from 'axios';
 import Cookies from 'universal-cookie'
 
 require('dotenv').config();
@@ -51,30 +58,29 @@ export default class Login extends Component {
 
     render() {
         return (
-            <div className="container">
+            <Container>
                 <br></br>
                 <h3>Login</h3>
                 <br></br>
-                <form onSubmit={this.login}>
-                    <div className="form-group">
-                        <label htmlFor="usernameInput">Username</label>
-                        <input type="text" required className="form-control" id="usernameInput" name="username" value={this.state.username} onChange={this.handleChange} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="passwordInput">Password</label>
-                        <input type="password" required className="form-control" id="passwordInput" name="password" value={this.state.password} onChange={this.handleChange} />
-                    </div>
-                    {this.state.userFailed && <p style={{color: "red"}}>User and password don't match</p>}
-                    <div>
-                        ¿Don't have an account?<span> </span>
+                <Form>
+                    <Form.Group controlId="usernameInput">
+                        <Form.Label>Username</Form.Label>
+                        <Form.Control type="text" required name="username" value={this.state.username} onChange={this.handleChange} />
+                    </Form.Group>
+                    <Form.Group controlId="passwordInput">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" required name="password" value={this.state.password} onChange={this.handleChange} />
+                    </Form.Group>
+                    {this.state.userFailed && <Alert variant={'danger'}>User and password don't match!</Alert>}
+                    <p>¿Don't have an account?<span> </span>
                         <Link to="./register-user">Sign up</Link>
-                    </div>
+                    </p>
                     <br></br>
-                    <div className="form-group">
-                        <input type="submit" value="Enter" className="btn btn-primary" />
-                    </div>
-                </form>
-            </div>
+                    <Button variant="primary" type="submit" onClick={this.login}>
+                        Enter
+                    </Button>
+                </Form>
+            </Container>
         )
     }
 }
