@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+
+import Container from 'react-bootstrap/Container';
+import Table from 'react-bootstrap/Table';
 import Task from './Task'
 import { sortingTasks } from '../../Utils/taskUtils'
+
 import axios from 'axios';
 import Cookies from 'universal-cookie'
-
 require('dotenv').config();
 const cookies = new Cookies();
 
@@ -66,25 +69,23 @@ export default class TasksList extends Component {
 
     render() {
         return (
-            <div className="container">
-                <div className="table-responsive-sm">
-                    <table className="table table-bordered">
-                        <thead className="thead-dark">
-                            <tr>
-                                <th scope="col">Title</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Time</th>
-                                <th scope="col">Imp</th>
-                                <th scope="col">Due Date</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </thead>
+            <Container>
+                <Table responsive="sm" striped bordered hover>
+                    <thead className="thead-dark">
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Imp</th>
+                            <th scope="col">Due Date</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
                         <tbody>
                             {this.tasksList()}
                         </tbody>
-                    </table>
-                </div>
-            </div>
+                </Table>
+            </Container>
         )
     }
 }

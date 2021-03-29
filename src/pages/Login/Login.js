@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
@@ -59,22 +61,30 @@ export default class Login extends Component {
     render() {
         return (
             <Container>
-                <br></br>
-                <h3>Login</h3>
-                <br></br>
-                <Form onSubmit={this.login}>
-                    <Form.Group controlId="usernameInput">
-                        <Form.Label>Username</Form.Label>
-                        <Form.Control type="text" required name="username" value={this.state.username} onChange={this.handleChange} />
-                    </Form.Group>
-                    <Form.Group controlId="passwordInput">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" required name="password" value={this.state.password} onChange={this.handleChange} />
-                    </Form.Group>
-                    {this.state.userFailed && <Alert variant={'danger'}>User and password don't match!</Alert>}
-                    <p>¿Don't have an account?<span> </span><Link to="./register-user">Sign up</Link></p>
-                    <Button type="submit">Enter</Button>
-                </Form>
+                <Row className="justify-content-center">
+                    <Col md="8" lg="6">
+                        <br></br>
+                        <h3>Login</h3>
+                        <br></br>
+                    </Col>
+                </Row>
+                <Row className="justify-content-center">
+                    <Col md="8" lg="6">
+                        <Form onSubmit={this.login}>
+                            <Form.Group controlId="usernameInput">
+                                <Form.Label>Username</Form.Label>
+                                <Form.Control type="text" required name="username" value={this.state.username} onChange={this.handleChange} />
+                            </Form.Group>
+                            <Form.Group controlId="passwordInput">
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control type="password" required name="password" value={this.state.password} onChange={this.handleChange} />
+                            </Form.Group>
+                            {this.state.userFailed && <Alert variant={'danger'}>User and password don't match!</Alert>}
+                            <p>¿Don't have an account?<span> </span><Link to="./register-user">Sign up</Link></p>
+                            <Button type="submit">Enter</Button>
+                        </Form>
+                    </Col>
+                </Row>
             </Container>
         )
     }

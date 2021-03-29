@@ -6,10 +6,9 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-import axios from 'axios';
 import validateFields from '../../Utils/userUtils'
 
-export default class FormUser extends Component {
+export default class UserForm extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -35,8 +34,8 @@ export default class FormUser extends Component {
         this.setState({[name]: value});
 
         const newErrors = this.state.errors;
-        // delete newErrors[name];
         newErrors[name] = '';
+        
         this.setState({errors: newErrors});
     }
 
@@ -81,16 +80,18 @@ export default class FormUser extends Component {
                         <Form.Control type="text" required name="username" value={this.state.username} onChange={this.handleChange} isInvalid={this.state.errors.username}/>
                         <Form.Control.Feedback type="invalid">{this.state.errors.username}</Form.Control.Feedback>
                     </Form.Group>
-                    <Form.Group controlId="passwordInput">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" required name="password" value={this.state.password} onChange={this.handleChange} isInvalid={this.state.errors.password}/>
-                        <Form.Control.Feedback type="invalid">{this.state.errors.password}</Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group controlId="passwordConfirmationInput">
-                        <Form.Label>Confirm password</Form.Label>
-                        <Form.Control type="password" required name="passwordConfirmation" value={this.state.passwordConfirmation} onChange={this.handleChange} isInvalid={this.state.errors.passwordConfirmation}/>
-                        <Form.Control.Feedback type="invalid">{this.state.errors.passwordConfirmation}</Form.Control.Feedback>
-                    </Form.Group>
+                    <Form.Row>
+                        <Form.Group as={Col} controlId="passwordInput">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" required name="password" value={this.state.password} onChange={this.handleChange} isInvalid={this.state.errors.password}/>
+                            <Form.Control.Feedback type="invalid">{this.state.errors.password}</Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group as={Col} controlId="passwordConfirmationInput">
+                            <Form.Label>Confirm password</Form.Label>
+                            <Form.Control type="password" required name="passwordConfirmation" value={this.state.passwordConfirmation} onChange={this.handleChange} isInvalid={this.state.errors.passwordConfirmation}/>
+                            <Form.Control.Feedback type="invalid">{this.state.errors.passwordConfirmation}</Form.Control.Feedback>
+                        </Form.Group>
+                    </Form.Row>
                     <p>¿Have an account?<span> </span>
                         <Link to="./">Log in</Link>
                     </p>

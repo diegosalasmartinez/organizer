@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import FormUser from './FormUser'
+import UserForm from './UserForm'
 
 import Cookies from 'universal-cookie'
 require('dotenv').config();
@@ -31,7 +31,7 @@ export default class CreateUser extends Component {
 
     render() {
         return (
-            <FormUser createUser={this.createUser}/>
+            <UserForm createUser={this.createUser}/>
         )
     }
 }

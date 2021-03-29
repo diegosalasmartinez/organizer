@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
-
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import Navigation from '../common/Navigation'
 
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
-import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
+import Navigation from '../common/Navigation'
 
 import Cookies from 'universal-cookie';
 import axios from 'axios';
-
 const cookies = new Cookies();
 
 export default class TaskForm extends Component {
@@ -82,8 +79,8 @@ export default class TaskForm extends Component {
         return (
             <>
                 <Navigation />
-                <div className="container">
-                    <form onSubmit={this.onSubmit}>
+                <Container>
+                    <Form onSubmit={this.onSubmit}>
                         <div className="form-group">
                             <label htmlFor="nameInput">Title</label>
                             <input type="text" required className="form-control" id="nameInput" name="title" placeholder="Eg. Became a Brawl Stars master" value={this.state.title} onChange={this.handleChange} />
@@ -125,8 +122,8 @@ export default class TaskForm extends Component {
                         </div>
                         <div className="form-group">
                         </div>
-                    </form>
-                </div>
+                    </Form>
+                </Container>
             </>
         )
     }
