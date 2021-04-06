@@ -25,7 +25,7 @@ export default class Navigation extends Component {
     render() {
         return (
             <>
-                <Navbar bg="dark" expand="lg" variant="dark">
+                <Navbar bg="dark" expand="lg" variant="dark" className="mb-4">
                     <Container>
                         <Link to="/home" className="navbar-brand">Organizer</Link>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -33,8 +33,7 @@ export default class Navigation extends Component {
                             <Nav className="mr-auto">
                                         <Link to="/home" className="nav-link">Tasks</Link>
                                         <Link to="/home/create" className="nav-link">Create Task</Link>
-                                        <Link to="/home/profile" className="nav-link">Profile</Link>
-
+                                        <Link to="/home/account" className="nav-link">My Account</Link>
                             </Nav>
                             <Form inline>
                                 <Button variant="secondary" onClick={this.logout}>Log out</Button>
@@ -42,7 +41,6 @@ export default class Navigation extends Component {
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
-                <br></br>
             </>
         )
     }

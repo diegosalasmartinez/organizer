@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-import validateFields from '../../Utils/userUtils'
+import validateFields from '../../utils/userUtils'
 
 export default class UserForm extends Component {
     constructor(props){
@@ -54,18 +54,16 @@ export default class UserForm extends Component {
     render() {
         return (
             <Container>
-                <br></br>
-                <h3>Create New User</h3>
-                <br></br>
+                <h3 className="my-4">Create New User</h3>
                 <Form noValidate onSubmit={this.onSubmit}>
                     <Form.Row>
                         <Form.Group as={Col} md="6" controlId="nameInput">
-                            <Form.Label id="nameInput">Name</Form.Label>
+                            <Form.Label>Name</Form.Label>
                             <Form.Control type="text" required name="name" value={this.state.name} onChange={this.handleChange} isInvalid={this.state.errors.name}/>
                             <Form.Control.Feedback type="invalid">{this.state.errors.name}</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group as={Col} md="6" controlId="lastNameInput">
-                            <Form.Label id="lastNameInput">Lastname</Form.Label>
+                            <Form.Label>Lastname</Form.Label>
                             <Form.Control type="text" required name="lastName" value={this.state.lastName} onChange={this.handleChange} isInvalid={this.state.errors.lastName}/>
                             <Form.Control.Feedback type="invalid">{this.state.errors.lastName}</Form.Control.Feedback>
                         </Form.Group>

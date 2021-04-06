@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import axios from 'axios'
-import TaskForm from '../../components/Task/TaskForm'
-import Cookies from 'universal-cookie'
 
-require('dotenv').config();
+import TaskForm from '../../components/task/TaskForm'
+
+import { updateTask } from '../../services/api/tasks'
+
+import Cookies from 'universal-cookie'
 const cookies = new Cookies();
 
 export default class EditTask extends Component {
@@ -13,13 +14,9 @@ export default class EditTask extends Component {
         }
     }
 
-    updateTask = (newTask) => {
-        console.log(newTask);
-        axios.patch(`${process.env.REACT_APP_API}/tasks/${newTask.id}`,newTask)
-            .then(res => {
-                window.location.href="../../home";
-            })
-            .catch(e => console.log(e));
+    updateTask = async (newTask) => {
+        const res = await updateTask(newTask);
+        window.location.href="../../home";
     }
 
     render() {

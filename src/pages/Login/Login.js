@@ -62,10 +62,8 @@ export default class Login extends Component {
         return (
             <Container>
                 <Row className="justify-content-center">
-                    <Col md="8" lg="6">
-                        <br></br>
+                    <Col md="8" lg="6" className="my-4">
                         <h3>Login</h3>
-                        <br></br>
                     </Col>
                 </Row>
                 <Row className="justify-content-center">

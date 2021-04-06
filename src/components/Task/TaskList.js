@@ -3,11 +3,10 @@ import React, { Component } from 'react'
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import Task from './Task'
-import { sortingTasks } from '../../Utils/taskUtils'
 
-import axios from 'axios';
+import { getTasksByUserId, deleteTask } from '../../services/api/tasks'
+
 import Cookies from 'universal-cookie'
-require('dotenv').config();
 const cookies = new Cookies();
 
 export default class TasksList extends Component {
@@ -18,41 +17,30 @@ export default class TasksList extends Component {
         }
     }
 
-    componentDidMount(){
+    async componentDidMount(){
         if(!cookies.get('username')){
             window.location.href="./";
         }
         else{
-            axios.get(`${process.env.REACT_APP_API}/tasks/${cookies.get('id')}`)
-                .then(res => {
-                    if(res.data.length > 0){
-                        sortingTasks(res.data);
-                        this.setState({tasks: res.data});
-                    }
-                    else{
-                        this.setState({tasks: []})
-                    }
-                })
-                .catch(e => console.log(e));
+            const tasks = await getTasksByUserId(cookies.get('id'));
+            this.setState({tasks: tasks});
         }
     }
     
-    deleteTask = (id) => {
-        const ans = window.confirm('¿Are you sure you want to delete this task?');
+    deleteTask = async (id) => {
+        const ans = window.confirm('Are you sure you want to delete this task?');
         if(ans){
-            axios.delete(`${process.env.REACT_APP_API}/tasks/${id}`)
-                .then(res => { this.setState({tasks: this.state.tasks.filter(el => el._id !== id)}) })
-                .catch(e => console.log(e));
+            const res = await deleteTask(id);
+            this.setState({tasks: this.state.tasks.filter(el => el._id !== id)})
             alert('Task deleted!');
         }
     }
     
-    finishTask = (id) => {
-        const ans = window.confirm('¿Are you sure you want complete this task?');
+    finishTask = async (id) => {
+        const ans = window.confirm('Are you sure you want complete this task?');
         if(ans){
-            axios.delete(`${process.env.REACT_APP_API}/tasks/${id}`)
-                .then(res => { this.setState({tasks: this.state.tasks.filter(el => el._id !== id)}) })
-                .catch(e => console.log(e));
+            const res = await deleteTask(id);
+            this.setState({tasks: this.state.tasks.filter(el => el._id !== id)})
             alert('Task completed!');
         }
     }

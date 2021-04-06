@@ -9,8 +9,9 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Navigation from '../common/Navigation'
 
+import { getTaskById } from '../../services/api/tasks'
+
 import Cookies from 'universal-cookie';
-import axios from 'axios';
 const cookies = new Cookies();
 
 export default class TaskForm extends Component {
@@ -32,13 +33,10 @@ export default class TaskForm extends Component {
             window.location.href="./";
         }
         if(this.props.id){
-            await axios.get(`${process.env.REACT_APP_API}/tasks/byId/${this.props.id}`)
-            .then(res => {
-                    const {_id, title, description, duration, importance} = res.data;
-                    const due_date = new Date(res.data.due_date);
-                    this.setState({_id:_id, title: title, description: description, duration: duration, importance: importance, due_date: due_date}) 
-                })
-                .catch(e => console.log(e));
+            const task = await getTaskById(this.props.id);
+            const {_id, title, description, duration, importance} = task;
+            const due_date = new Date(task.due_date);
+            this.setState({_id:_id, title: title, description: description, duration: duration, importance: importance, due_date: due_date});
         }
     }
 
