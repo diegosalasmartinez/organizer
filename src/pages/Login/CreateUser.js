@@ -3,9 +3,9 @@ import React, { Component } from 'react'
 import UserForm from './UserForm'
 
 import axios from 'axios';
-require('dotenv').config();
 
 import Cookies from 'universal-cookie'
+require('dotenv').config();
 const cookies = new Cookies();
 
 export default class CreateUser extends Component {

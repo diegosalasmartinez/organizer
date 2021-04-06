@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Navigation from '../common/Navigation'
 
-import { getTaskById } from '../../services/api/tasks'
+import { getTaskById } from '../../services/api/taskAPI'
 
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();

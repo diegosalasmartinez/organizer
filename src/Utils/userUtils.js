@@ -1,5 +1,4 @@
-import axios from 'axios';
-require('dotenv').config();
+import { getUsers } from '../services/api/userAPI'
 
 const validateEmail = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -8,7 +7,7 @@ const validateEmail = (email) => {
 
 const validateFields = async (user) => {
     try{
-        const res = await axios.get(`${process.env.REACT_APP_API}/users`);
+        const res = await getUsers();
         const usernames = res.data.map( function(obj){ return obj["username"] })
     
         const errors = {};
