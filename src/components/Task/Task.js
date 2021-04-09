@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTrashAlt, faPen, faStar } from '@fortawesome/free-solid-svg-icons'
 
-import { showDateAsString } from '../../utils/taskUtils'
+import { showDateAsString } from '../../utils/task'
 
 export default class Task extends Component {
     updateTask = () => {

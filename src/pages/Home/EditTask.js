@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import TaskForm from '../../components/task/TaskForm'
 
-import { updateTask } from '../../services/api/taskAPI'
+import { updateTask } from '../../services/api/task'
 
 import Cookies from 'universal-cookie'
 const cookies = new Cookies();

@@ -1,4 +1,4 @@
-import { sortingTasks } from '../../utils/taskUtils'
+import { sortingTasks } from '../../utils/task'
 
 import axios from 'axios'
 require('dotenv').config();
@@ -49,4 +49,4 @@ const deleteTask = async (id) => {
     }
 }
 
-export { getTasksByUserId, getTaskById, createTask, updateTask, deleteTask };
+export { getTasksByUserId, getTaskById, createTask, updateTask, deleteTask }

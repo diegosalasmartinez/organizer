@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-import validateFields from '../../utils/userUtils'
+import { validateFields } from '../../utils/validations/user'
 
 export default class UserForm extends Component {
     constructor(props){

@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import Task from './Task'
 
-import { getTasksByUserId, deleteTask } from '../../services/api/taskAPI'
+import { getTasksByUserId, deleteTask } from '../../services/api/task'
 
 import Cookies from 'universal-cookie'
 const cookies = new Cookies();

@@ -18,4 +18,13 @@ const login = async(username, password) => {
     }
 }
 
-export { getUsers, login } 
+const createUser = async (user) => {
+    try{
+        const res= await axios.post(`${process.env.REACT_APP_API}/users/add`,user);
+        return res.data;
+    } catch(e){
+        console.log(e);
+    }
+}
+
+export { getUsers, login, createUser } 
