@@ -4,6 +4,7 @@ require('dotenv').config();
 const getUsers = async () => {
     try{
         const res = await axios.get(`${process.env.REACT_APP_API}/users`);
+        return res.data;
     } catch(e){
         console.log(e);
     }

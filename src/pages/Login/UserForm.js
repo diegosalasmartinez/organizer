@@ -42,7 +42,6 @@ export default class UserForm extends Component {
     onSubmit = async (e) => {
         e.preventDefault();
         const {errors, ...newUser} = this.state;
-
         const newErrors = await validateFields(newUser);
 
         if(!Object.keys(newErrors).length){

@@ -14,9 +14,9 @@ export default class CreateUser extends Component {
         }
     }
 
-    createUser = (newUser)=>{
+    createUser = async (newUser)=>{
         const {passwordConfirmation, ...user} = newUser;
-        const myUser = createUserAPI(user);
+        const myUser = await createUserAPI(user);
         cookies.set('id',myUser._id, {path: "/"});
         cookies.set('username',myUser.username, {path: "/"});
         cookies.set('password',myUser.password, {path: "/"});
