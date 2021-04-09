@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import TaskForm from "../../components/Task/TaskForm"
-import Cookies from 'universal-cookie';
 
-require('dotenv').config();
+import TaskForm from "../../components/task/TaskForm"
+
+import { createTask } from '../../services/api/task'
+
+import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 export default class CreateTask extends Component {
@@ -12,13 +13,9 @@ export default class CreateTask extends Component {
             window.location.href="./";
         }
     }
-    createTask = (newTask) => {
-        axios.post(`${process.env.REACT_APP_API}/tasks/add`,newTask)
-            .then(res => {
-                console.log(res.data);
-                window.location.href="../home";
-            })
-            .catch(e => console.log(e));
+    createTask = async (newTask) => {
+        const res = await createTask(newTask);
+        window.location.href="../home";
     }
 
     render() {

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTrashAlt, faPen, faStar } from '@fortawesome/free-solid-svg-icons'
-import { showDateAsString } from '../../Utils/taskUtils'
+
+import { showDateAsString } from '../../utils/task'
 
 export default class Task extends Component {
     updateTask = () => {
@@ -32,12 +34,9 @@ export default class Task extends Component {
                 <td>{this.showImportance()}</td>
                 <td>{showDateAsString(new Date(this.props.task.due_date))}</td>
                 <td>
-                    <FontAwesomeIcon key={1} onClick={this.updateTask} icon={faPen} />
-                    <span>   </span>
-                    <FontAwesomeIcon key={2} onClick={this.finishTask} icon={faCheck} />
-                    <span>   </span>
+                    <FontAwesomeIcon key={1} onClick={this.updateTask} icon={faPen} className="mr-3"/>
+                    <FontAwesomeIcon key={2} onClick={this.finishTask} icon={faCheck} className="mr-3"/>
                     <FontAwesomeIcon key={3} onClick={this.deleteTask} icon={faTrashAlt} />
-                    <span>   </span>
                 </td>
             </tr>
         )

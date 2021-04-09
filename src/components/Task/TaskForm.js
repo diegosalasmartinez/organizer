@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import Navbar from '../common/Navbar'
-import Cookies from 'universal-cookie';
-import axios from 'axios';
 
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import Navigation from '../common/Navigation'
+
+import { getTaskById } from '../../services/api/task'
+
+import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 export default class TaskForm extends Component {
@@ -26,13 +33,10 @@ export default class TaskForm extends Component {
             window.location.href="./";
         }
         if(this.props.id){
-            await axios.get(`${process.env.REACT_APP_API}/tasks/byId/${this.props.id}`)
-            .then(res => {
-                    const {_id, title, description, duration, importance} = res.data;
-                    const due_date = new Date(res.data.due_date);
-                    this.setState({_id:_id, title: title, description: description, duration: duration, importance: importance, due_date: due_date}) 
-                })
-                .catch(e => console.log(e));
+            const task = await getTaskById(this.props.id);
+            const {_id, title, description, duration, importance} = task;
+            const due_date = new Date(task.due_date);
+            this.setState({_id:_id, title: title, description: description, duration: duration, importance: importance, due_date: due_date});
         }
     }
 
@@ -72,56 +76,44 @@ export default class TaskForm extends Component {
     }
 
     render() {
+        const state = this.state;
         return (
             <>
-                <Navbar />
-                <div className="container">
-                    <h2>{this.props.title}</h2>
-                    <br></br>
-                    <form onSubmit={this.onSubmit}>
-                        <div className="form-group">
-                            <label htmlFor="nameInput">Title</label>
-                            <input type="text" required className="form-control" id="nameInput" name="title" placeholder="Eg. Became a Brawl Stars master" value={this.state.title} onChange={this.handleChange} />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="descriptionInput">Description</label>
-                            <input type="text" required className="form-control" id="descriptionInput" name="description" placeholder="Eg. Watch all Trebor's videos" value={this.state.description} onChange={this.handleChange} />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="durationInput">Duration (in minutes)</label>
-                            <input type="text" required className="form-control" id="durationInput" name="duration" placeholder="60" value={this.state.duration} onChange={this.handleChange} />
-                        </div>
-                        <div className="form-group">
-                            <label>Importance</label>
-                            <br></br>
-                            <div className="form-check form-check-inline">
-                                <input className="form-check-input" type="radio" name="importance" id="importanceRadios1" value="1" checked={this.state.importance === 1} onChange={this.handleChange}/>
-                                <label className="form-check-label" htmlFor="importanceRadios1">Low</label>
-                            </div>
-                            <div className="form-check form-check-inline">
-                                <input className="form-check-input" type="radio" name="importance" id="importanceRadios2" value="2" checked={this.state.importance === 2} onChange={this.handleChange}/>
-                                <label className="form-check-label" htmlFor="importanceRadios2">Medium</label>
-                            </div>
-                            <div className="form-check form-check-inline">
-                                <input className="form-check-input" type="radio" name="importance" id="importanceRadios3" value="3" checked={this.state.importance === 3} onChange={this.handleChange}/>
-                                <label className="form-check-label" htmlFor="importanceRadios3">High</label>
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="dueDateInput">Due Date</label>
-                            <div>
-                                <DatePicker id="dueDateInput" name="due_date" selected={this.state.due_date} onChange={this.onChangeDate} dateFormat="dd/MM/yyyy" minDate={new Date()} />
-                            </div>
-                        </div>
-                        <br></br>
-                        <div className="form-group">
-                            <button type="button" className="btn btn-primary mr-2" onClick={this.backHome}>Back</button>
-                            <input type="submit" value={this.props.textButton} className="btn btn-primary" />
-                        </div>
-                        <div className="form-group">
-                        </div>
-                    </form>
-                </div>
+                <Navigation />
+                <Container>
+                    <Form onSubmit={this.onSubmit}>
+                        <Form.Group controlId="nameInput">
+                            <Form.Label>Title</Form.Label>
+                            <Form.Control type="text" required name="title" placeholder="Eg. Became a Brawl Stars master" value={state.title} onChange={this.handleChange} />
+                        </Form.Group>
+                        <Form.Group controlId="descriptionInput">
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control type="text" required name="description" placeholder="Eg. Watch all Yde's videos" value={state.description} onChange={this.handleChange} />
+                        </Form.Group>
+                        <Row>
+                            <Form.Group as={Col} controlId="durationInput" md="6">
+                                <Form.Label>Duration (in minutes)</Form.Label>
+                                <Form.Control type="text" required name="duration" placeholder="60" value={state.duration} onChange={this.handleChange} />
+                            </Form.Group>
+                            <Form.Group as={Col} controlId="importanceRadios" md="6">
+                                <Form.Label className="mb-3">Importance</Form.Label>
+                                <div key="importanceRadios">
+                                    <Form.Check custom inline type="radio" name="importance" id="importanceRadios-1" label="Low" value="1" checked={state.importance === 1} onChange={this.handleChange}/>
+                                    <Form.Check custom inline type="radio" name="importance" id="importanceRadios-2" label="Medium" value="2" checked={state.importance === 2} onChange={this.handleChange}/>
+                                    <Form.Check custom inline type="radio" name="importance" id="importanceRadios-3" label="High" value="3" checked={state.importance === 3} onChange={this.handleChange}/>
+                                </div>
+                            </Form.Group>
+                        </Row>
+                            <Form.Group controlId="dueDateInput">
+                                <Form.Label>Due Date</Form.Label>
+                                <div className="mb-5">
+                                    <DatePicker className="py-1 px-2" name="due_date" selected={state.due_date} onChange={this.onChangeDate} dateFormat="dd/MM/yyyy" minDate={new Date()} />
+                                </div>
+                            </Form.Group>
+                            <Button className="mr-2" onClick={this.backHome}>Back</Button>
+                            <Button type="submit">{this.props.textButton}</Button>
+                    </Form>
+                </Container>
             </>
         )
     }

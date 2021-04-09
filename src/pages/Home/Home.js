@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import Cookies from 'universal-cookie'
-import Navbar from '../../components/common/Navbar'
-import TasksList from '../../components/Task/TaskList'
 
+import Navigation from '../../components/common/Navigation'
+import TasksList from '../../components/task/TaskList'
+
+import Cookies from 'universal-cookie'
 const cookies = new Cookies();
 
 export default class Home extends Component {
@@ -15,7 +16,7 @@ export default class Home extends Component {
     render() {
         return (
             <>
-                <Navbar />
+                <Navigation />
                 <TasksList />
             </>
         )

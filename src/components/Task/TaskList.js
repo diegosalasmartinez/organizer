@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import Task from './Task'
-import { sortingTasks } from '../../Utils/taskUtils'
-import axios from 'axios';
-import Cookies from 'universal-cookie'
 
-require('dotenv').config();
+import Container from 'react-bootstrap/Container';
+import Table from 'react-bootstrap/Table';
+import Task from './Task'
+
+import { getTasksByUserId, deleteTask } from '../../services/api/task'
+
+import Cookies from 'universal-cookie'
 const cookies = new Cookies();
 
 export default class TasksList extends Component {
@@ -15,55 +17,36 @@ export default class TasksList extends Component {
         }
     }
 
-    componentDidMount(){
+    async componentDidMount(){
         if(!cookies.get('username')){
             window.location.href="./";
         }
         else{
-            axios.get(`${process.env.REACT_APP_API}/tasks/${cookies.get('id')}`)
-                .then(res => {
-                    if(res.data.length > 0){
-                        sortingTasks(res.data);
-                        this.setState({tasks: res.data});
-                    }
-                    else{
-                        this.setState({tasks: []})
-                    }
-                })
-                .catch(e => console.log(e));
+            const tasks = await getTasksByUserId(cookies.get('id'));
+            this.setState({tasks: tasks});
         }
     }
     
-    deleteTask = (id) => {
-        const ans = window.confirm('¿Are you sure you want to delete this task?');
+    deleteTask = async (id) => {
+        const ans = window.confirm('Are you sure you want to delete this task?');
         if(ans){
-            axios.delete(`${process.env.REACT_APP_API}/tasks/${id}`)
-                .then(res => { this.setState({tasks: this.state.tasks.filter(el => el._id !== id)}) })
-                .catch(e => console.log(e));
+            const res = await deleteTask(id);
+            this.setState({tasks: this.state.tasks.filter(el => el._id !== id)})
             alert('Task deleted!');
         }
     }
     
-    finishTask = (id) => {
-        const ans = window.confirm('¿Are you sure you want complete this task?');
+    finishTask = async (id) => {
+        const ans = window.confirm('Are you sure you want complete this task?');
         if(ans){
-            axios.delete(`${process.env.REACT_APP_API}/tasks/${id}`)
-                .then(res => { this.setState({tasks: this.state.tasks.filter(el => el._id !== id)}) })
-                .catch(e => console.log(e));
+            const res = await deleteTask(id);
+            this.setState({tasks: this.state.tasks.filter(el => el._id !== id)})
             alert('Task completed!');
         }
     }
 
     updateTask = (id) => {
         window.location.href='./home/edit/'+id;
-    }
-
-    sayHello = () => {
-        return (
-        <>
-            <h2>Welcome {cookies.get('name')} {cookies.get('lastName')}</h2>
-            <br></br>
-        </> )
     }
 
     tasksList = () => {
@@ -74,26 +57,23 @@ export default class TasksList extends Component {
 
     render() {
         return (
-            <div className="container">
-                {this.sayHello()}
-                <div className="table-responsive-sm">
-                    <table className="table table-bordered">
-                        <thead className="thead-dark">
-                            <tr>
-                                <th scope="col">Title</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Time</th>
-                                <th scope="col">Imp</th>
-                                <th scope="col">Due Date</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </thead>
+            <Container>
+                <Table responsive="sm" striped bordered hover>
+                    <thead className="thead-dark">
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Imp</th>
+                            <th scope="col">Due Date</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
                         <tbody>
                             {this.tasksList()}
                         </tbody>
-                    </table>
-                </div>
-            </div>
+                </Table>
+            </Container>
         )
     }
 }
