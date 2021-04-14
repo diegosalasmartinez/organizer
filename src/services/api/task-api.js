@@ -1,52 +1,26 @@
+import { apiGet, apiPost, apiDelete, apiPatch} from '../api/api'
 import { sortingTasks } from '../../utils/task-utils'
 
-import axios from 'axios'
-require('dotenv').config();
-
 const getTasksByUserId = async (id) => {
-    try{
-        const res = await axios.get(`${process.env.REACT_APP_API}/tasks/${id}`);
-        if(res.data.length > 0){
-            sortingTasks(res.data);
-            return res.data;
-        }
-        return [];
-    } catch(e){
-        console.log(e)
-    }
+    const tasks = await apiGet(`tasks/${id}`);
+    sortingTasks(tasks);
+    return tasks;
 }
 
 const getTaskById = async (id) => {
-    try{
-        const res = await axios.get(`${process.env.REACT_APP_API}/tasks/byId/${id}`);
-        return res.data;
-    } catch(e){
-        console.log(e)
-    }
+    return await apiGet(`tasks/byId/${id}`);
 }
 
 const createTask = async (newTask) => {
-    try{
-        const res = await axios.post(`${process.env.REACT_APP_API}/tasks/add`,newTask);
-    } catch(e){
-        console.log(e);
-    }
+    return await apiPost(`tasks/add`, newTask);
 }
 
 const updateTask = async (newTask) => {
-    try{
-        const res = await axios.patch(`${process.env.REACT_APP_API}/tasks/${newTask.id}`,newTask);
-    } catch(e){
-        console.log(e);
-    }
+    return await apiPatch(`tasks/${newTask.id}`, newTask);
 }
 
 const deleteTask = async (id) => {
-    try{
-        const res = await axios.delete(`${process.env.REACT_APP_API}/tasks/${id}`);
-    } catch(e){
-        console.log(e);
-    }
+    return await apiDelete(`tasks/${id}`);
 }
 
 export { getTasksByUserId, getTaskById, createTask, updateTask, deleteTask }

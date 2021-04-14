@@ -1,31 +1,15 @@
-import axios from 'axios'
-require('dotenv').config();
+import { apiGet, apiPost, apiDelete, apiPatch} from '../api/api'
 
 const getUsers = async () => {
-    try{
-        const res = await axios.get(`${process.env.REACT_APP_API}/users`);
-        return res.data;
-    } catch(e){
-        console.log(e);
-    }
+    return await apiGet(`users`);
 }
 
 const login = async(username, password) => {
-    try{
-        const res = await axios.get(`${process.env.REACT_APP_API}/users/login?username=${username}&password=${password}`);
-        return res.data;
-    } catch(e){
-        console.log(e);
-    }
+    return await apiGet(`users/login?username=${username}&password=${password}`);
 }
 
 const createUser = async (user) => {
-    try{
-        const res= await axios.post(`${process.env.REACT_APP_API}/users/add`,user);
-        return res.data;
-    } catch(e){
-        console.log(e);
-    }
+    return await apiPost(`users/add`, user);
 }
 
 export { getUsers, login, createUser } 
