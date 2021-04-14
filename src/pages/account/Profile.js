@@ -5,7 +5,8 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 
 import Cookies from 'universal-cookie'
-require('dotenv').config();
+const cookies = new Cookies();
+
 
 export default class Profile extends Component {
     constructor(props){
@@ -20,7 +21,7 @@ export default class Profile extends Component {
     }
 
     componentDidMount(){
-
+        cookies.get('username');
     }
 
     onSubmit = e => {

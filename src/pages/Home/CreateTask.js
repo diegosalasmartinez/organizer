@@ -14,7 +14,7 @@ export default class CreateTask extends Component {
         }
     }
     createTask = async (newTask) => {
-        const res = await createTask(newTask);
+        await createTask(newTask);
         window.location.href="../home";
     }
 

@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 
 import { login } from '../../services/api/user-api'
 
@@ -19,6 +20,7 @@ export default class Login extends Component {
         this.state = {
             username: '',
             password: '',
+            requestAccess: false,
             userFailed: false
         }
     }
@@ -36,6 +38,7 @@ export default class Login extends Component {
     
     login = async (e) => {
         e.preventDefault();
+        this.setState({requestAccess: true});
         const { username, password} = this.state;
         const data = await login(username, password);
         
@@ -49,7 +52,7 @@ export default class Login extends Component {
             window.location.href="./home";
         }
         else{
-            this.setState({userFailed: true});
+            this.setState({userFailed: true, requestAccess: false});
         }
     }
 
@@ -74,7 +77,10 @@ export default class Login extends Component {
                             </Form.Group>
                             {this.state.userFailed && <Alert variant={'danger'}>User and password don't match!</Alert>}
                             <p>¿Don't have an account?<span> </span><Link to="./register-user">Sign up</Link></p>
-                            <Button type="submit">Enter</Button>
+                            <Button type="submit" disabled={this.state.requestAccess}>
+                                { this.state.requestAccess && <Spinner className="mr-2" as="span" animation="border" size="sm" role="status" aria-hidden="true" /> }
+                                Enter
+                            </Button>
                         </Form>
                     </Col>
                 </Row>

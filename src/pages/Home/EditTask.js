@@ -15,7 +15,7 @@ export default class EditTask extends Component {
     }
 
     updateTask = async (newTask) => {
-        const res = await updateTask(newTask);
+        await updateTask(newTask);
         window.location.href="../../home";
     }
 

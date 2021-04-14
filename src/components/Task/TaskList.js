@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
+import Spinner from 'react-bootstrap/Spinner'
+import Row from 'react-bootstrap/Row'
+
 import Task from './Task'
 import Modal from '../common/Modal'
 
@@ -16,6 +19,7 @@ export default class TasksList extends Component {
         super(props);
         this.state = {
             tasks: [],
+            tasksLoaded: false,
             modal : {
                 id: 0,
                 option: '',
@@ -32,7 +36,7 @@ export default class TasksList extends Component {
         }
         else{
             const tasks = await getTasksByUserId(cookies.get('id'));
-            this.setState({tasks: tasks});
+            this.setState({tasks: tasks, dataLoaded: true});
         }
     }
     
@@ -58,14 +62,14 @@ export default class TasksList extends Component {
     }
 
     deleteTask = async (id) => {        
-        const res = await deleteTask(id);
+        await deleteTask(id);
         this.setState({tasks: this.state.tasks.filter(el => el._id !== id)});  
         //show notification
         //add finish task
     }
     
     finishTask = async (id) => {
-        const res = await deleteTask(id);
+        await deleteTask(id);
         this.setState({tasks: this.state.tasks.filter(el => el._id !== id)});
     }
 
@@ -92,11 +96,14 @@ export default class TasksList extends Component {
                             <th scope="col">Due Date</th>
                             <th scope="col">Actions</th>
                         </tr>
-                    </thead>
-                        <tbody>
-                            {this.tasksList()}
-                        </tbody>
+                    </thead>                        
+                    <tbody>
+                        {this.tasksList()}
+                    </tbody>
                 </Table>
+                <Row className="justify-content-md-center">
+                    { !this.state.dataLoaded && <Spinner animation="border" /> }
+                </Row>
                 <Modal showModal={this.state.showModal} closeModal={this.closeModal} acceptModal={this.acceptModal}/>
             </Container>
         )

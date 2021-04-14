@@ -1,2 +1,1 @@
-const apiUrl = "https://diegosalas-organizer.herokuapp.com";
-export { apiUrl }
+export const apiUrl = "https://diegosalas-organizer.herokuapp.com";

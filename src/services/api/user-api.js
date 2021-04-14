@@ -1,4 +1,4 @@
-import { apiGet, apiPost, apiDelete, apiPatch} from '../api/api'
+import { apiGet, apiPost } from '../api/api'
 
 const getUsers = async () => {
     return await apiGet(`users`);
