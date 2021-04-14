@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import UserForm from './UserForm'
 
-import { createUser as createUserAPI } from '../../services/api/user'
+import { createUser as createUserAPI } from '../../services/api/user-api'
 
 import Cookies from 'universal-cookie'
 const cookies = new Cookies();

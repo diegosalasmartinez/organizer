@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 
-import { login } from '../../services/api/user'
+import { login } from '../../services/api/user-api'
 
 import Cookies from 'universal-cookie'
 const cookies = new Cookies();

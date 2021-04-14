@@ -3,8 +3,10 @@ import React, { Component } from 'react'
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import Task from './Task'
+import Modal from '../common/Modal'
 
-import { getTasksByUserId, deleteTask } from '../../services/api/task'
+import { getTasksByUserId, deleteTask } from '../../services/api/task-api'
+import optionModals from '../common/optionModals'
 
 import Cookies from 'universal-cookie'
 const cookies = new Cookies();
@@ -13,7 +15,14 @@ export default class TasksList extends Component {
     constructor(props){
         super(props);
         this.state = {
-            tasks: []
+            tasks: [],
+            modal : {
+                id: 0,
+                option: '',
+                titleModal: '',
+                bodyModal: ''
+            },
+            showModal: false
         }
     }
 
@@ -27,22 +36,37 @@ export default class TasksList extends Component {
         }
     }
     
-    deleteTask = async (id) => {
-        const ans = window.confirm('Are you sure you want to delete this task?');
-        if(ans){
-            const res = await deleteTask(id);
-            this.setState({tasks: this.state.tasks.filter(el => el._id !== id)})
-            alert('Task deleted!');
-        }
+    showModal = (option, id) => {
+        this.setState({showModal: true});
+        this.setState(prevState => ({
+            modal: {                   
+                ...prevState.modal, id: id, option: option      
+            }
+        }));
+        console.log(this.state.modal)
+    }
+
+    acceptModal = () => {
+        this.setState({showModal: false});
+        if(this.state.modal.option === optionModals.DELETE) this.deleteTask(this.state.modal.id);
+        if(this.state.modal.option === optionModals.UPDATE) this.updateTask(this.state.modal.id);
+    }
+
+    closeModal = () => {
+        this.setState({showModal: false});
+        this.setState({modal: { id: 0, option: '', titleModal: '', bodyModal: ''}});
+    }
+
+    deleteTask = async (id) => {        
+        const res = await deleteTask(id);
+        this.setState({tasks: this.state.tasks.filter(el => el._id !== id)});  
+        //show notification
+        //add finish task
     }
     
     finishTask = async (id) => {
-        const ans = window.confirm('Are you sure you want complete this task?');
-        if(ans){
-            const res = await deleteTask(id);
-            this.setState({tasks: this.state.tasks.filter(el => el._id !== id)})
-            alert('Task completed!');
-        }
+        const res = await deleteTask(id);
+        this.setState({tasks: this.state.tasks.filter(el => el._id !== id)});
     }
 
     updateTask = (id) => {
@@ -51,7 +75,7 @@ export default class TasksList extends Component {
 
     tasksList = () => {
         return this.state.tasks.map(task => {
-            return <Task task={task} deleteTask={this.deleteTask} updateTask={this.updateTask} finishTask={this.finishTask} key={task._id}/>
+            return <Task task={task} showModal={this.showModal} key={task._id}/>
         })
     }
 
@@ -73,6 +97,7 @@ export default class TasksList extends Component {
                             {this.tasksList()}
                         </tbody>
                 </Table>
+                <Modal showModal={this.state.showModal} closeModal={this.closeModal} acceptModal={this.acceptModal}/>
             </Container>
         )
     }

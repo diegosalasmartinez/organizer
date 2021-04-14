@@ -1,5 +1,5 @@
-import { getUsers } from '../../services/api/user'
-import { validateFieldsInputs } from '../user'
+import { getUsers } from '../../services/api/user-api'
+import { validateFieldsInputs } from '../user-utils'
 
 
 const validateFields = async (user) => {

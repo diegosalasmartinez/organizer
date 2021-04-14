@@ -1,4 +1,4 @@
-import { sortingTasks } from '../../utils/task'
+import { sortingTasks } from '../../utils/task-utils'
 
 import axios from 'axios'
 require('dotenv').config();
